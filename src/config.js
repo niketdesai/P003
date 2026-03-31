@@ -4,7 +4,7 @@ export const PROJECT = {
   description: "ENND I, LLC — Practice overview, pricing, talk track, and client ledger.",
   entity: "ENND I, LLC",
   passcode: "ennd1",
-  version: "v0.1.0-260330",
+  version: "v0.2.0-260330",
   accent: "#D4A853",
   accentName: "gold",
   repoName: "P003",
