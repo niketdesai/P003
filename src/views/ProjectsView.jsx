@@ -1,34 +1,35 @@
 import { useState, useEffect } from "react";
-import { PROJECTS } from "../data/practice.js";
+import { PROJECTS, STAGES } from "../data/practice.js";
 
 const ACCENT = "#D4A853";
 
-const STATUS = {
-  "Active":       { color: "#4ade80", bg: "#4ade8012", label: "ACTIVE" },
-  "Lead":         { color: ACCENT,    bg: ACCENT+"12", label: "LEAD" },
-  "Negotiating":  { color: "#fb923c", bg: "#fb923c12", label: "NEGOTIATING" },
-  "Signed":       { color: "#818CF8", bg: "#818CF812", label: "SIGNED" },
+const STAGE_COLORS = {
+  identified: "#555",
+  lead:        "#D4A853",
+  proposed:    "#fb923c",
+  negotiating: "#f87171",
+  signed:      "#818CF8",
+  active:      "#4ade80",
+  paused:      "#555",
+  closed:      "#333",
 };
 
-const STATUS_ORDER = ["Active", "Negotiating", "Lead", "Signed"];
-
-// Group projects by status
-function groupByStatus(projects) {
-  const groups = {};
-  STATUS_ORDER.forEach(s => {
-    const items = projects.filter(p => p.status === s);
-    if (items.length) groups[s] = items;
-  });
-  return groups;
-}
+const PAYMENT_COLORS = {
+  "None":                  "#555",
+  "Retainer":              ACCENT,
+  "15% equity assignment": "#c084fc",
+};
 
 export default function ProjectsView() {
   const [revealed, setRevealed] = useState(false);
-  const [open, setOpen] = useState(null);
-
+  const [selected, setSelected] = useState(null);
   useEffect(() => { setTimeout(() => setRevealed(true), 100); }, []);
 
-  const groups = groupByStatus(PROJECTS);
+  // Pipeline stage counts
+  const stageCounts = STAGES.map(s => ({
+    ...s,
+    count: PROJECTS.filter(p => p.stage === s.id).length,
+  })).filter(s => s.count > 0);
 
   return (
     <div style={{
@@ -38,147 +39,172 @@ export default function ProjectsView() {
       transition: "opacity 0.5s ease, transform 0.5s ease",
     }}>
 
-      {/* Status legend */}
+      {/* Pipeline summary */}
       <div style={{
-        display: "flex", gap: 16, flexWrap: "wrap",
+        display: "flex", gap: 6, flexWrap: "wrap",
         marginBottom: 20,
       }}>
-        {Object.entries(STATUS).map(([key, val]) => (
-          <div key={key} style={{
+        {stageCounts.map(s => (
+          <div key={s.id} style={{
             display: "flex", alignItems: "center", gap: 6,
-            fontFamily: "'JetBrains Mono', monospace",
-            fontSize: 9, color: val.color, letterSpacing: "0.06em",
+            background: "#0e0c08", border: "1px solid #1e1c14",
+            borderRadius: 20, padding: "5px 10px",
           }}>
             <div style={{
               width: 6, height: 6, borderRadius: "50%",
-              background: val.color, flexShrink: 0,
+              background: STAGE_COLORS[s.id],
             }} />
-            {val.label}
+            <span style={{
+              fontFamily: "'JetBrains Mono', monospace",
+              fontSize: 9, color: "#888",
+            }}>{s.label}</span>
+            <span style={{
+              fontFamily: "'JetBrains Mono', monospace",
+              fontSize: 9, color: STAGE_COLORS[s.id], fontWeight: 700,
+            }}>{s.count}</span>
           </div>
         ))}
       </div>
 
-      {Object.entries(groups).map(([status, projects]) => {
-        const sc = STATUS[status] || STATUS["Lead"];
-        return (
-          <div key={status} style={{ marginBottom: 28 }}>
-            <div style={{
-              fontFamily: "'JetBrains Mono', monospace",
-              fontSize: 9, fontWeight: 700,
-              color: sc.color, letterSpacing: "0.1em",
-              marginBottom: 10,
-              paddingBottom: 6,
-              borderBottom: `1px solid ${sc.color}22`,
-            }}>
-              {sc.label}
-            </div>
+      {/* Project list */}
+      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+        {PROJECTS.map((p) => {
+          const isSelected = selected === p.code;
+          const stageColor = STAGE_COLORS[p.stage] || "#555";
+          const payColor = PAYMENT_COLORS[p.payment] || ACCENT;
 
-            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-              {projects.map((proj) => {
-                const isOpen = open === proj.code;
-                return (
-                  <div key={proj.code} style={{
-                    background: "#0e0c08",
-                    border: `1px solid ${isOpen ? sc.color + "44" : "#1e1c14"}`,
-                    borderRadius: 8, overflow: "hidden",
-                    transition: "border-color 0.2s",
+          return (
+            <div key={p.code}
+              onClick={() => setSelected(isSelected ? null : p.code)}
+              style={{
+                background: "#0e0c08",
+                border: `1px solid ${isSelected ? ACCENT + "44" : "#1e1c14"}`,
+                borderRadius: 8, overflow: "hidden",
+                cursor: "pointer", transition: "border-color 0.15s",
+              }}>
+
+              {/* Row */}
+              <div style={{
+                display: "grid",
+                gridTemplateColumns: "44px 1fr auto",
+                alignItems: "center",
+                gap: 12, padding: "13px 14px",
+              }}>
+                {/* Code */}
+                <div style={{
+                  fontFamily: "'JetBrains Mono', monospace",
+                  fontSize: 9, color: "#444", fontWeight: 700,
+                }}>{p.code}</div>
+
+                {/* Project + client */}
+                <div>
+                  <div style={{
+                    fontFamily: "'DM Sans', sans-serif",
+                    fontSize: 13, fontWeight: 700, color: "#f0ede5",
+                    marginBottom: 2,
+                  }}>{p.project}</div>
+                  <div style={{
+                    fontFamily: "'DM Sans', sans-serif",
+                    fontSize: 11, color: "#555",
+                  }}>{p.client}</div>
+                </div>
+
+                {/* Stage + payment */}
+                <div style={{ textAlign: "right" }}>
+                  <div style={{
+                    fontFamily: "'JetBrains Mono', monospace",
+                    fontSize: 8, fontWeight: 700,
+                    color: stageColor, marginBottom: 4,
+                    letterSpacing: "0.06em",
+                  }}>{p.stage.toUpperCase()}</div>
+                  <div style={{
+                    fontFamily: "'JetBrains Mono', monospace",
+                    fontSize: 8, color: payColor,
+                  }}>{p.payment}</div>
+                </div>
+              </div>
+
+              {/* Expanded detail */}
+              {isSelected && (
+                <div style={{
+                  borderTop: "1px solid #1a1814",
+                  padding: "14px 14px 16px",
+                  animation: "fadeIn 0.2s ease",
+                }}>
+                  <div style={{
+                    display: "grid", gridTemplateColumns: "1fr 1fr",
+                    gap: 8, marginBottom: p.notes ? 12 : 0,
                   }}>
-                    <button
-                      onClick={() => setOpen(isOpen ? null : proj.code)}
-                      style={{
-                        width: "100%", background: "none", border: "none",
-                        padding: "14px 16px", cursor: "pointer",
-                        display: "flex", alignItems: "center",
-                        justifyContent: "space-between", textAlign: "left",
-                        gap: 12,
-                      }}
-                    >
-                      <div style={{ display: "flex", alignItems: "center", gap: 10, minWidth: 0 }}>
-                        <div style={{
-                          width: 6, height: 6, borderRadius: "50%",
-                          background: sc.color, flexShrink: 0,
-                        }} />
-                        <div style={{ minWidth: 0 }}>
-                          <div style={{
-                            fontFamily: "'DM Sans', sans-serif",
-                            fontSize: 13, fontWeight: 700,
-                            color: "#f0ede5",
-                            marginBottom: 2,
-                          }}>{proj.name}</div>
-                          <div style={{
-                            fontFamily: "'JetBrains Mono', monospace",
-                            fontSize: 9, color: "#444",
-                            letterSpacing: "0.04em",
-                          }}>{proj.code} · {proj.vertical}</div>
-                        </div>
-                      </div>
-                      <div style={{ display: "flex", alignItems: "center", gap: 10, flexShrink: 0 }}>
+                    {[
+                      { label: "VERTICAL", value: p.vertical },
+                      { label: "RATE", value: p.rate ? `$${(p.rate/1000).toFixed(1)}k/mo` : "—" },
+                      { label: "IP ASSIGNED", value: p.ipAssigned === null ? "TBD" : p.ipAssigned ? "Yes" : "No" },
+                      { label: "NDA", value: p.nda ? "Yes" : "No" },
+                    ].map(({ label, value }) => (
+                      <div key={label}>
                         <div style={{
                           fontFamily: "'JetBrains Mono', monospace",
-                          fontSize: 8, fontWeight: 700,
-                          color: sc.color,
-                          background: sc.bg,
-                          padding: "3px 8px", borderRadius: 3,
-                          letterSpacing: "0.06em",
-                        }}>{sc.label}</div>
-                        <span style={{ color: "#333", fontSize: 12 }}>{isOpen ? "−" : "+"}</span>
-                      </div>
-                    </button>
-
-                    {isOpen && (
-                      <div style={{
-                        padding: "0 16px 16px",
-                        animation: "fadeIn 0.2s ease",
-                        borderTop: `1px solid ${sc.color}22`,
-                      }}>
-                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 14 }}>
-                          {[
-                            { label: "CLIENT", value: proj.client },
-                            { label: "STRUCTURE", value: proj.structure },
-                            { label: "PAYMENT", value: proj.payment },
-                            { label: "VERTICAL", value: proj.vertical },
-                          ].map(({ label, value }) => (
-                            <div key={label} style={{
-                              background: "#080806", borderRadius: 5,
-                              padding: "8px 10px",
-                            }}>
-                              <div style={{
-                                fontFamily: "'JetBrains Mono', monospace",
-                                fontSize: 8, color: "#555",
-                                letterSpacing: "0.06em", marginBottom: 4,
-                              }}>{label}</div>
-                              <div style={{
-                                fontFamily: "'DM Sans', sans-serif",
-                                fontSize: 11, color: "#c8c4b0",
-                              }}>{value}</div>
-                            </div>
-                          ))}
-                        </div>
+                          fontSize: 8, color: "#555", marginBottom: 3,
+                        }}>{label}</div>
                         <div style={{
-                          marginTop: 12,
                           fontFamily: "'DM Sans', sans-serif",
-                          fontSize: 11, color: "#666", lineHeight: 1.6,
-                          borderLeft: `2px solid ${sc.color}33`,
-                          paddingLeft: 10,
-                        }}>
-                          {proj.note}
-                        </div>
+                          fontSize: 11, color: "#888",
+                        }}>{value}</div>
                       </div>
-                    )}
+                    ))}
                   </div>
-                );
-              })}
+                  {p.paymentNote && (
+                    <div style={{
+                      fontFamily: "'DM Sans', sans-serif",
+                      fontSize: 11, color: payColor,
+                      marginBottom: p.notes ? 8 : 0,
+                      lineHeight: 1.5,
+                    }}>{p.paymentNote}</div>
+                  )}
+                  {p.notes && (
+                    <div style={{
+                      fontFamily: "'DM Sans', sans-serif",
+                      fontSize: 11, color: "#555", lineHeight: 1.5,
+                    }}>{p.notes}</div>
+                  )}
+                </div>
+              )}
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
 
-      <div style={{
-        fontFamily: "'JetBrains Mono', monospace",
-        fontSize: 9, color: "#252520",
-        textAlign: "center", marginTop: 8,
-      }}>
-        STATUS FLOW: LEAD → NEGOTIATING → SIGNED → ACTIVE
+      {/* Stage legend */}
+      <div style={{ marginTop: 24 }}>
+        <div style={{
+          fontFamily: "'JetBrains Mono', monospace",
+          fontSize: 10, color: "#555", letterSpacing: "0.08em", marginBottom: 10,
+        }}>PIPELINE STAGES</div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+          {STAGES.map(s => (
+            <div key={s.id} style={{
+              display: "grid", gridTemplateColumns: "100px 1fr",
+              gap: 10, alignItems: "center",
+            }}>
+              <div style={{
+                display: "flex", alignItems: "center", gap: 6,
+              }}>
+                <div style={{
+                  width: 5, height: 5, borderRadius: "50%",
+                  background: STAGE_COLORS[s.id], flexShrink: 0,
+                }} />
+                <span style={{
+                  fontFamily: "'JetBrains Mono', monospace",
+                  fontSize: 8, color: STAGE_COLORS[s.id], fontWeight: 700,
+                }}>{s.label.toUpperCase()}</span>
+              </div>
+              <span style={{
+                fontFamily: "'DM Sans', sans-serif",
+                fontSize: 10, color: "#444",
+              }}>{s.desc}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
