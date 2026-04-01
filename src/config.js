@@ -4,7 +4,7 @@ export const PROJECT = {
   description: "ENND I, LLC — Practice operating system.",
   entity: "ENND I, LLC",
   passcode: "ennd1",
-  version: "v2.1.1-260331",
+  version: "v2.2.0-260331",
   accent: "#D4A853",
   accentName: "gold",
   repoName: "P003",

@@ -4,11 +4,13 @@ import Shell from "./layout/Shell.jsx";
 import OverviewView from "./views/OverviewView.jsx";
 import ProjectsView from "./views/ProjectsView.jsx";
 import PricingView from "./views/PricingView.jsx";
+import ActionsView from "./views/ActionsView.jsx";
 
 const TABS = [
   { id: "overview",  label: "Overview",  component: OverviewView },
   { id: "projects",  label: "Projects",  component: ProjectsView },
   { id: "pricing",   label: "Pricing",   component: PricingView  },
+  { id: "actions",   label: "Actions",   component: ActionsView  },
 ];
 
 export default function App({ arriving }) {
