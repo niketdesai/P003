@@ -137,7 +137,7 @@ export const ACTIONS = [
     id: "A031",
     category: "pipeline",
     title: "Update P300 SOW with standard terms",
-    status: "open",
+    status: "done",
     dependency: "A030 (standard terms defined)",
     notes: "P300 SOW is missing: kill fee, T&E, IP ownership, collaboration window, actual price. Need to push standard terms block to P300.",
     projects: ["P300"],
