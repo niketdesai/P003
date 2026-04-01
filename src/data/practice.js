@@ -63,22 +63,40 @@ export const TRAVEL = {
 };
 
 // ─── PRICING ─────────────────────────────────────────────────
+// Two-axis U-curve:
+//   Duration: 6mo is the sweet spot. 3 and 12 carry premiums. <3 is list.
+//   Density:  2d/wk is the sweet spot (+5%). 1d and 3d baseline. 4d premium (−5%).
 export const PRICING = {
-  listRate: 17500,
-  floorMonthly: 7500,
+  listRate: 17500,         // per day per month, no commitment
+  floorMonthly: 7500,      // absolute minimum cash/month
   currency: "USD",
   unit: "day",
   maxDays: 4,
 
-  engagementMonths: [3, 6, 9, 12],
+  // Column headers
+  engagementTiers: ["<3 mo", "3 mo", "6 mo", "9 mo", "12 mo"],
   daysPerWeek: [1, 2, 3, 4],
 
-  rates: [
-    [16000, 14000, 14000, 16000],
-    [29000, 25000, 25000, 29000],
-    [41000, 35000, 35000, 41000],
-    [52000, 44000, 44000, 52000],
+  // Discount percentages [days_index][tier_index]
+  // Negative = premium (client pays MORE than list)
+  discounts: [
+    [0,   10,  30,  25,  20],    // 1d/wk — baseline
+    [5,   15,  35,  30,  25],    // 2d/wk — sweet spot (+5)
+    [0,   10,  30,  25,  20],    // 3d/wk — same as 1d
+    [-5,   5,  25,  20,  15],    // 4d/wk — premium (−5)
   ],
+
+  // Monthly retainer rates [days_index][tier_index]
+  // Derived from listRate × days × (1 - discount), rounded down to $500
+  rates: [
+    [17500, 15500, 12000, 13000, 14000],    // 1d/wk
+    [33000, 29500, 22500, 24500, 26000],    // 2d/wk
+    [52500, 47000, 36500, 39000, 42000],    // 3d/wk
+    [73500, 66500, 52500, 56000, 59500],    // 4d/wk
+  ],
+
+  // Sweet spot indices: 2d/wk (row 1) × 6mo (col 2)
+  sweetSpot: { di: 1, ti: 2 },
 
   killFee: {
     model: "33% of remaining contract value or one additional month \u2014 whichever is higher.",
@@ -115,7 +133,7 @@ export const PROJECTS = [
     payment: "None",
     paymentNote: "Family business. No compensation accepted.",
     monthlyValue: 0,
-    engagementMonths: null,
+    recommended: null,
     ipAssigned: false,
     nda: false,
     notes: "Founded by Niket\u2019s mother (July 2). Ongoing operational support.",
@@ -128,8 +146,8 @@ export const PROJECTS = [
     vertical: "Technology",
     payment: "Retainer",
     paymentNote: null,
-    monthlyValue: 17500,
-    engagementMonths: null,
+    monthlyValue: 13000,
+    recommended: { days: 1, tier: 3 },  // 1d/wk × 9mo
     ipAssigned: null,
     nda: true,
     notes: "Live lead. Rate conversation pending.",
@@ -142,8 +160,8 @@ export const PROJECTS = [
     vertical: "Finance",
     payment: "Retainer",
     paymentNote: "Advisory role; may run aspects of process.",
-    monthlyValue: 17500,
-    engagementMonths: null,
+    monthlyValue: 12000,
+    recommended: { days: 1, tier: 2 },  // 1d/wk × 6mo
     ipAssigned: null,
     nda: true,
     notes: "Seed fundraise process. Modeling and packaging as inputs.",
@@ -156,8 +174,8 @@ export const PROJECTS = [
     vertical: "Finance",
     payment: "Retainer",
     paymentNote: null,
-    monthlyValue: 17500,
-    engagementMonths: null,
+    monthlyValue: 12000,
+    recommended: { days: 1, tier: 2 },  // 1d/wk × 6mo
     ipAssigned: null,
     nda: true,
     notes: "Financial Avatar project context.",
@@ -170,8 +188,8 @@ export const PROJECTS = [
     vertical: "Technology",
     payment: "Retainer",
     paymentNote: "Current advisor relationship. Paid consulting TBD.",
-    monthlyValue: 17500,
-    engagementMonths: null,
+    monthlyValue: 12000,
+    recommended: { days: 1, tier: 2 },  // 1d/wk × 6mo
     ipAssigned: null,
     nda: true,
     notes: "Series D targeting >$1B. Summer 2026. Primary generational asset.",
@@ -185,7 +203,7 @@ export const PROJECTS = [
     payment: "15% equity assignment",
     paymentNote: "ENND I, LLC (or Living Trust) assigned via operating agreement or side letter.",
     monthlyValue: 0,
-    engagementMonths: null,
+    recommended: null,
     ipAssigned: false,
     nda: true,
     notes: "Considerable prior work. Assignment pending formalization.",
@@ -199,7 +217,7 @@ export const PROJECTS = [
     payment: "15% equity assignment",
     paymentNote: "ENND I, LLC (or Living Trust) assigned via operating agreement or side letter.",
     monthlyValue: 0,
-    engagementMonths: null,
+    recommended: null,
     ipAssigned: false,
     nda: true,
     notes: "Considerable prior work. Assignment pending formalization.",
@@ -213,7 +231,7 @@ export const SOW_FIELDS = [
   { field: "entity",           source: "BRAND.entity",             required: true,  note: "ENND I, LLC" },
   { field: "scope",            source: "Project context",          required: true,  note: "Defined in each project \u2014 not stored in P003" },
   { field: "rate",             source: "PROJECTS.monthlyValue",    required: true,  note: "Monthly retainer or equity structure" },
-  { field: "engagementLength", source: "PROJECTS.engagementMonths",required: true,  note: "3, 6, 9, or 12 months" },
+  { field: "engagementLength", source: "PROJECTS.recommended",   required: true,  note: "Days/wk and duration tier from pricing matrix" },
   { field: "startDate",        source: "Agreed at signing",        required: true,  note: "Calendar date" },
   { field: "killFee",          source: "PRICING.killFee",          required: true,  note: "33% of remaining or 1 month \u2014 whichever is higher." },
   { field: "ipAssignment",     source: "TERMS.ipRule",             required: true,  note: "Assigned if full rate paid. Retained otherwise." },
