@@ -25,7 +25,7 @@ export const ACTIONS = [
     title: "Resolve OPV equity holding entity",
     status: "open",
     dependency: "Turner / Goldman Sachs",
-    notes: "Should OPV 15% assignment sit in ENND I, Living Trust, or Irrevocable Trust? ENND I has operational exposure \u2014 equity should not be in the blast radius of consulting liability. Likely answer: Living Trust (or Irrevocable once set up).",
+    notes: "Hold in Desfam Long Living Trust (revocable). Research confirms: avoids probate, no tax event on transfer (IRS treats revocable trust as disregarded entity), retains full control and income rights. Does NOT protect from creditors \u2014 that\u2019s what the Irrevocable Trust adds once set up. Practical steps: (1) check OPV operating agreement for permitted transferee language, (2) add trust as permitted transferee if missing, (3) execute assignment of membership interest to Living Trust, (4) update operating agreement to reflect trust as member. Turner + business attorney should handle.",
     projects: ["P057"],
   },
   {
@@ -34,7 +34,7 @@ export const ACTIONS = [
     title: "Resolve GFS equity holding entity",
     status: "open",
     dependency: "Turner / Goldman Sachs",
-    notes: "Same question as OPV. 15% assignment. Likely same answer \u2014 Living Trust or Irrevocable.",
+    notes: "Same structure as OPV \u2014 Desfam Long Living Trust. Same steps: check operating agreement for permitted transferee language, execute assignment, update agreement. Handle alongside A001.",
     projects: ["P500"],
   },
   {
