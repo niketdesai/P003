@@ -3,15 +3,18 @@ import { createRoot } from "react-dom/client";
 import "./theme/responsive.css";
 import App from "./App.jsx";
 import PasswordGate from "./components/PasswordGate.jsx";
+import { PROJECT } from "./config.js";
 
 function Root() {
-  const [authed, setAuthed] = useState(false);
-  const [arriving, setArriving] = useState(false);
+  const sessionKey = `p003_auth_${PROJECT.passcode}`;
+  const [authed, setAuthed] = useState(() => {
+    try { return sessionStorage.getItem(sessionKey) === "1"; } catch { return false; }
+  });
+  const [arriving, setArriving] = useState(authed);
 
   const handleAuth = () => {
-    // Brief delay for the "arrival" animation to start
+    try { sessionStorage.setItem(sessionKey, "1"); } catch {}
     setArriving(true);
-    // Content appears after gate exit animation completes
     setTimeout(() => setAuthed(true), 200);
   };
 
