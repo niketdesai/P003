@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ENTITY, TRAVEL, PRINCIPLES } from "../data/practice.js";
+import { BRAND, PRINCIPLES, TERMS, TRAVEL } from "../data/practice.js";
 
 const ACCENT = "#D4A853";
 
@@ -15,75 +15,121 @@ export default function OverviewView() {
       transition: "opacity 0.5s ease, transform 0.5s ease",
     }}>
 
-      {/* Ethos */}
+      {/* Identity */}
       <div style={{
-        background: "#0e0c08",
-        border: `1px solid ${ACCENT}33`,
-        borderRadius: 8,
-        padding: "18px 20px",
-        marginBottom: 24,
+        marginBottom: 28,
+        paddingBottom: 24,
+        borderBottom: `1px solid ${ACCENT}22`,
       }}>
         <div style={{
-          fontFamily: "'JetBrains Mono', monospace",
-          fontSize: 18, fontWeight: 700,
-          color: ACCENT, letterSpacing: "0.04em",
-          marginBottom: 10,
+          display: "flex", alignItems: "baseline", gap: 12,
+          marginBottom: 8,
         }}>
-          {ENTITY.ethos}
+          <span style={{
+            fontFamily: "'JetBrains Mono', monospace",
+            fontSize: 22, fontWeight: 700,
+            color: "#f0ede5", letterSpacing: "-0.02em",
+          }}>{BRAND.name}</span>
+          <span style={{
+            fontFamily: "'JetBrains Mono', monospace",
+            fontSize: 14, fontWeight: 700,
+            color: ACCENT,
+          }}>{BRAND.mark}</span>
         </div>
         <div style={{
           fontFamily: "'DM Sans', sans-serif",
-          fontSize: 12, color: "#888", lineHeight: 1.65,
+          fontSize: 13, color: "#888", lineHeight: 1.6,
+          marginBottom: 14,
         }}>
-          {ENTITY.ethosNote}
+          Advisory and consulting. Billed through {BRAND.entity}.
+        </div>
+        <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+          {BRAND.verticals.map(v => (
+            <span key={v} style={{
+              fontFamily: "'JetBrains Mono', monospace",
+              fontSize: 9, fontWeight: 700,
+              color: ACCENT, letterSpacing: "0.08em",
+              background: `${ACCENT}12`,
+              border: `1px solid ${ACCENT}22`,
+              borderRadius: 4, padding: "4px 10px",
+            }}>{v.toUpperCase()}</span>
+          ))}
         </div>
       </div>
 
-      {/* Entity constants */}
+      {/* Principles */}
       <div style={{
         fontFamily: "'JetBrains Mono', monospace",
-        fontSize: 10, color: "#555", letterSpacing: "0.08em", marginBottom: 12,
-      }}>ENTITY</div>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6, marginBottom: 24 }}>
-        {[
-          { label: "ENTITY", value: ENTITY.name },
-          { label: "DBA", value: ENTITY.dba },
-          { label: "VERTICALS", value: ENTITY.verticals.join(" · ") },
-          { label: "DOMAIN", value: `${ENTITY.domain} (${ENTITY.domainStatus})` },
-          { label: "HOURS", value: ENTITY.collaborationHours },
-          { label: "NDA", value: ENTITY.nda },
-          { label: "EXCLUSIVITY", value: ENTITY.exclusivity },
-          { label: "IP RULE", value: ENTITY.ipRule },
-        ].map(({ label, value }) => (
-          <div key={label} style={{
+        fontSize: 10, color: "#555", letterSpacing: "0.08em", marginBottom: 14,
+      }}>PRINCIPLES</div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 28 }}>
+        {PRINCIPLES.map((p, i) => (
+          <div key={i} style={{
             background: "#0e0c08",
             border: "1px solid #1e1c14",
-            borderRadius: 6, padding: "10px 12px",
+            borderRadius: 8, padding: "14px 16px",
           }}>
             <div style={{
               fontFamily: "'JetBrains Mono', monospace",
-              fontSize: 8, color: "#555", letterSpacing: "0.08em", marginBottom: 5,
+              fontSize: 11, fontWeight: 700,
+              color: ACCENT, marginBottom: 6, letterSpacing: "0.01em",
+            }}>{p.title}</div>
+            <div style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: 12, color: "#777", lineHeight: 1.6,
+            }}>{p.body}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* Standard Terms */}
+      <div style={{
+        fontFamily: "'JetBrains Mono', monospace",
+        fontSize: 10, color: "#555", letterSpacing: "0.08em", marginBottom: 14,
+      }}>STANDARD TERMS</div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 28 }}>
+        {[
+          { label: "COLLABORATION", value: `${TERMS.collaborationWindow} — ${TERMS.collaborationNote}` },
+          { label: "IP", value: TERMS.ipRule },
+          { label: "NDA", value: TERMS.nda },
+          { label: "T&E", value: TERMS.tePolicy },
+          { label: "EXCLUSIVITY", value: TERMS.exclusivity },
+          { label: "PAYMENT", value: TERMS.paymentTerms },
+          { label: "PREPAY", value: TERMS.upfrontDiscount },
+        ].map(({ label, value }) => (
+          <div key={label} style={{
+            display: "grid", gridTemplateColumns: "110px 1fr",
+            background: "#0e0c08",
+            border: "1px solid #1e1c14",
+            borderRadius: 6, overflow: "hidden",
+          }}>
+            <div style={{
+              fontFamily: "'JetBrains Mono', monospace",
+              fontSize: 8, color: "#555", letterSpacing: "0.06em",
+              padding: "10px 12px",
+              borderRight: "1px solid #1e1c14",
+              display: "flex", alignItems: "flex-start",
+              paddingTop: 11,
             }}>{label}</div>
             <div style={{
               fontFamily: "'DM Sans', sans-serif",
-              fontSize: 11, color: "#c8c4b0", lineHeight: 1.4,
+              fontSize: 11, color: "#c8c4b0",
+              padding: "10px 12px", lineHeight: 1.5,
             }}>{value}</div>
           </div>
         ))}
       </div>
 
-      {/* Travel policy */}
+      {/* Travel */}
       <div style={{
         fontFamily: "'JetBrains Mono', monospace",
-        fontSize: 10, color: "#555", letterSpacing: "0.08em", marginBottom: 12,
-      }}>TRAVEL & EXPENSES</div>
-      <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 24 }}>
+        fontSize: 10, color: "#555", letterSpacing: "0.08em", marginBottom: 14,
+      }}>TRAVEL</div>
+      <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
         {[
-          { label: "LONG HAUL (2K+ MI)", value: TRAVEL.longHaul.class },
-          { label: "SHORT HAUL · AM/NIGHT", value: "Business" },
-          { label: "SHORT HAUL · MIDDAY", value: "Economy (travel day)" },
+          { label: "LONG HAUL", value: `${TRAVEL.longHaul.threshold} — ${TRAVEL.longHaul.class}` },
+          ...TRAVEL.shortHaul.map(s => ({ label: `SHORT · ${s.window.toUpperCase()}`, value: s.class })),
           { label: "HOTEL", value: TRAVEL.hotel },
-          { label: "T&E", value: TRAVEL.teNote },
         ].map(({ label, value }) => (
           <div key={label} style={{
             display: "grid", gridTemplateColumns: "140px 1fr",
@@ -104,31 +150,6 @@ export default function OverviewView() {
               padding: "10px 12px",
               display: "flex", alignItems: "center",
             }}>{value}</div>
-          </div>
-        ))}
-      </div>
-
-      {/* Principles */}
-      <div style={{
-        fontFamily: "'JetBrains Mono', monospace",
-        fontSize: 10, color: "#555", letterSpacing: "0.08em", marginBottom: 12,
-      }}>PRINCIPLES</div>
-      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-        {PRINCIPLES.map((p, i) => (
-          <div key={i} style={{
-            background: "#0e0c08",
-            border: "1px solid #1e1c14",
-            borderRadius: 8, padding: "14px 16px",
-          }}>
-            <div style={{
-              fontFamily: "'JetBrains Mono', monospace",
-              fontSize: 10, fontWeight: 700,
-              color: ACCENT, marginBottom: 6, letterSpacing: "0.02em",
-            }}>{p.title}</div>
-            <div style={{
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: 12, color: "#888", lineHeight: 1.6,
-            }}>{p.body}</div>
           </div>
         ))}
       </div>

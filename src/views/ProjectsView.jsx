@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { PROJECTS, STAGES } from "../data/practice.js";
+import { PROJECTS, STAGES, PRICING } from "../data/practice.js";
 
 const ACCENT = "#D4A853";
 
@@ -20,16 +20,31 @@ const PAYMENT_COLORS = {
   "15% equity assignment": "#c084fc",
 };
 
+function fmt(n) {
+  if (n >= 1000) return "$" + (n / 1000).toFixed(n % 1000 === 0 ? 0 : 1) + "k";
+  return "$" + n;
+}
+
 export default function ProjectsView() {
   const [revealed, setRevealed] = useState(false);
   const [selected, setSelected] = useState(null);
   useEffect(() => { setTimeout(() => setRevealed(true), 100); }, []);
 
-  // Pipeline stage counts
-  const stageCounts = STAGES.map(s => ({
-    ...s,
-    count: PROJECTS.filter(p => p.stage === s.id).length,
-  })).filter(s => s.count > 0);
+  // Analytics
+  const totalMonthly = PROJECTS.reduce((s, p) => s + (p.monthlyValue || 0), 0);
+  const cashProjects = PROJECTS.filter(p => p.monthlyValue > 0);
+  const equityProjects = PROJECTS.filter(p => p.payment?.includes("equity"));
+
+  // Group by stage for funnel
+  const stageGroups = STAGES.map(s => {
+    const projects = PROJECTS.filter(p => p.stage === s.id);
+    const value = projects.reduce((sum, p) => sum + (p.monthlyValue || 0), 0);
+    return { ...s, projects, value, count: projects.length };
+  }).filter(s => s.count > 0);
+
+  // For funnel bar widths
+  const maxValue = Math.max(...stageGroups.map(s => s.value), 1);
+  const maxCount = Math.max(...stageGroups.map(s => s.count), 1);
 
   return (
     <div style={{
@@ -39,34 +54,111 @@ export default function ProjectsView() {
       transition: "opacity 0.5s ease, transform 0.5s ease",
     }}>
 
-      {/* Pipeline summary */}
+      {/* Summary cards */}
       <div style={{
-        display: "flex", gap: 6, flexWrap: "wrap",
-        marginBottom: 20,
+        display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
+        gap: 8, marginBottom: 24,
       }}>
-        {stageCounts.map(s => (
-          <div key={s.id} style={{
-            display: "flex", alignItems: "center", gap: 6,
-            background: "#0e0c08", border: "1px solid #1e1c14",
-            borderRadius: 20, padding: "5px 10px",
+        {[
+          { label: "PIPELINE", value: fmt(totalMonthly), sub: "/mo if all close", color: ACCENT },
+          { label: "CASH", value: String(cashProjects.length), sub: `of ${PROJECTS.length} projects`, color: ACCENT },
+          { label: "EQUITY", value: String(equityProjects.length), sub: "assignments", color: "#c084fc" },
+        ].map(({ label, value, sub, color }) => (
+          <div key={label} style={{
+            background: "#0e0c08",
+            border: "1px solid #1e1c14",
+            borderRadius: 8, padding: "14px 12px",
+            textAlign: "center",
           }}>
             <div style={{
-              width: 6, height: 6, borderRadius: "50%",
-              background: STAGE_COLORS[s.id],
-            }} />
-            <span style={{
               fontFamily: "'JetBrains Mono', monospace",
-              fontSize: 9, color: "#888",
-            }}>{s.label}</span>
-            <span style={{
+              fontSize: 8, color: "#444", letterSpacing: "0.08em",
+              marginBottom: 8,
+            }}>{label}</div>
+            <div style={{
               fontFamily: "'JetBrains Mono', monospace",
-              fontSize: 9, color: STAGE_COLORS[s.id], fontWeight: 700,
-            }}>{s.count}</span>
+              fontSize: 20, fontWeight: 700, color,
+              marginBottom: 4,
+            }}>{value}</div>
+            <div style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: 9, color: "#444",
+            }}>{sub}</div>
           </div>
         ))}
       </div>
 
+      {/* Stage funnel */}
+      <div style={{
+        fontFamily: "'JetBrains Mono', monospace",
+        fontSize: 10, color: "#555", letterSpacing: "0.08em", marginBottom: 14,
+      }}>PIPELINE BY STAGE</div>
+      <div style={{
+        display: "flex", flexDirection: "column", gap: 6,
+        marginBottom: 28,
+      }}>
+        {stageGroups.map(s => {
+          const barWidth = s.value > 0
+            ? Math.max(8, (s.value / maxValue) * 100)
+            : Math.max(8, (s.count / maxCount) * 30);
+          const stageColor = STAGE_COLORS[s.id] || "#555";
+
+          return (
+            <div key={s.id} style={{
+              background: "#0e0c08",
+              border: "1px solid #1e1c14",
+              borderRadius: 6, padding: "12px 14px",
+            }}>
+              <div style={{
+                display: "flex", justifyContent: "space-between",
+                alignItems: "center", marginBottom: 8,
+              }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <div style={{
+                    width: 6, height: 6, borderRadius: "50%",
+                    background: stageColor, flexShrink: 0,
+                  }} />
+                  <span style={{
+                    fontFamily: "'JetBrains Mono', monospace",
+                    fontSize: 9, fontWeight: 700, color: stageColor,
+                    letterSpacing: "0.04em",
+                  }}>{s.label.toUpperCase()}</span>
+                  <span style={{
+                    fontFamily: "'JetBrains Mono', monospace",
+                    fontSize: 9, color: "#444",
+                  }}>{s.count} project{s.count !== 1 ? "s" : ""}</span>
+                </div>
+                <span style={{
+                  fontFamily: "'JetBrains Mono', monospace",
+                  fontSize: 11, fontWeight: 700,
+                  color: s.value > 0 ? "#f0ede5" : "#333",
+                }}>
+                  {s.value > 0 ? fmt(s.value) + "/mo" : "\u2014"}
+                </span>
+              </div>
+              {/* Bar */}
+              <div style={{
+                height: 4, background: "#151310",
+                borderRadius: 2, overflow: "hidden",
+              }}>
+                <div style={{
+                  height: "100%",
+                  width: `${barWidth}%`,
+                  background: `${stageColor}88`,
+                  borderRadius: 2,
+                  transition: "width 0.4s ease",
+                }} />
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
       {/* Project list */}
+      <div style={{
+        fontFamily: "'JetBrains Mono', monospace",
+        fontSize: 10, color: "#555", letterSpacing: "0.08em", marginBottom: 14,
+      }}>ALL PROJECTS</div>
       <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
         {PROJECTS.map((p) => {
           const isSelected = selected === p.code;
@@ -90,13 +182,11 @@ export default function ProjectsView() {
                 alignItems: "center",
                 gap: 12, padding: "13px 14px",
               }}>
-                {/* Code */}
                 <div style={{
                   fontFamily: "'JetBrains Mono', monospace",
                   fontSize: 9, color: "#444", fontWeight: 700,
                 }}>{p.code}</div>
 
-                {/* Project + client */}
                 <div>
                   <div style={{
                     fontFamily: "'DM Sans', sans-serif",
@@ -109,7 +199,6 @@ export default function ProjectsView() {
                   }}>{p.client}</div>
                 </div>
 
-                {/* Stage + payment */}
                 <div style={{ textAlign: "right" }}>
                   <div style={{
                     fontFamily: "'JetBrains Mono', monospace",
@@ -119,8 +208,11 @@ export default function ProjectsView() {
                   }}>{p.stage.toUpperCase()}</div>
                   <div style={{
                     fontFamily: "'JetBrains Mono', monospace",
-                    fontSize: 8, color: payColor,
-                  }}>{p.payment}</div>
+                    fontSize: 10, fontWeight: 700,
+                    color: p.monthlyValue > 0 ? "#f0ede5" : payColor,
+                  }}>
+                    {p.monthlyValue > 0 ? fmt(p.monthlyValue) + "/mo" : p.payment}
+                  </div>
                 </div>
               </div>
 
@@ -137,7 +229,7 @@ export default function ProjectsView() {
                   }}>
                     {[
                       { label: "VERTICAL", value: p.vertical },
-                      { label: "RATE", value: p.rate ? `$${(p.rate/1000).toFixed(1)}k/mo` : "—" },
+                      { label: "MONTHLY", value: p.monthlyValue > 0 ? fmt(p.monthlyValue) : "\u2014" },
                       { label: "IP ASSIGNED", value: p.ipAssigned === null ? "TBD" : p.ipAssigned ? "Yes" : "No" },
                       { label: "NDA", value: p.nda ? "Yes" : "No" },
                     ].map(({ label, value }) => (
@@ -172,39 +264,6 @@ export default function ProjectsView() {
             </div>
           );
         })}
-      </div>
-
-      {/* Stage legend */}
-      <div style={{ marginTop: 24 }}>
-        <div style={{
-          fontFamily: "'JetBrains Mono', monospace",
-          fontSize: 10, color: "#555", letterSpacing: "0.08em", marginBottom: 10,
-        }}>PIPELINE STAGES</div>
-        <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-          {STAGES.map(s => (
-            <div key={s.id} style={{
-              display: "grid", gridTemplateColumns: "100px 1fr",
-              gap: 10, alignItems: "center",
-            }}>
-              <div style={{
-                display: "flex", alignItems: "center", gap: 6,
-              }}>
-                <div style={{
-                  width: 5, height: 5, borderRadius: "50%",
-                  background: STAGE_COLORS[s.id], flexShrink: 0,
-                }} />
-                <span style={{
-                  fontFamily: "'JetBrains Mono', monospace",
-                  fontSize: 8, color: STAGE_COLORS[s.id], fontWeight: 700,
-                }}>{s.label.toUpperCase()}</span>
-              </div>
-              <span style={{
-                fontFamily: "'DM Sans', sans-serif",
-                fontSize: 10, color: "#444",
-              }}>{s.desc}</span>
-            </div>
-          ))}
-        </div>
       </div>
     </div>
   );

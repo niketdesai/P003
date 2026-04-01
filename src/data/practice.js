@@ -1,95 +1,98 @@
-// P003 — ENND I, LLC Practice Data
+// P003 — Practice Data
 // Source of truth. Other projects pull from this.
 
-// ─── ENTITY ───────────────────────────────────────────────────
-export const ENTITY = {
-  name: "ENND I, LLC",
-  dba: "All Star Travel",
-  ein: true,
-  domain: "ennd.co",
-  domainStatus: "inactive",
+// ─── BRAND ───────────────────────────────────────────────────
+export const BRAND = {
+  name: "Niket Desai",
+  mark: "/N",
+  site: "niket.com",
+  entity: "ENND I, LLC",
   verticals: ["Travel", "Technology", "Finance"],
-  collaborationHours: "11:00–16:00 PT",
-  ethos: "V(t) = ∫ O(t) / C(t) dt",
-  ethosNote: "Value is a function of Opportunity divided by Cost over Time. The goal of every engagement is to deliver 10–100x the cost of the engagement. If the opportunity is not large enough to justify the cost, the answer is not yet — not a discount.",
-  nda: "Standard practice on all engagements.",
-  exclusivity: "None. Confidentiality protected. Not contractual.",
-  ipRule: "IP assigned to client when full rate is paid. Not assigned otherwise.",
 };
 
-// ─── TRAVEL POLICY ────────────────────────────────────────────
+// ─── PRINCIPLES ──────────────────────────────────────────────
+// These are how you operate. Not tactics, not pricing mechanics.
+export const PRINCIPLES = [
+  {
+    title: "Autonomy over schedule.",
+    body: "I work on my terms. Collaboration happens during the window. Everything else is protected time.",
+  },
+  {
+    title: "Fit matters more than revenue.",
+    body: "I choose who I work with. The wrong engagement at the right price is still wrong.",
+  },
+  {
+    title: "Retainer, not hourly.",
+    body: "Clients buy a monthly commitment to outcomes. Not a time clock.",
+  },
+  {
+    title: "Hold the floor.",
+    body: "The rate reflects the value. Historically, underselling has been the most expensive mistake I\u2019ve made.",
+  },
+  {
+    title: "Equity is earned at list price.",
+    body: "If I take equity in lieu of cash, it\u2019s valued at the list rate. Not the floor, not a discount \u2014 the list.",
+  },
+  {
+    title: "No resentment.",
+    body: "Discounted engagements produce resentment. Resentment produces bad work. Structure that works for both sides is not the same as a lower number.",
+  },
+];
+
+// ─── STANDARD TERMS ──────────────────────────────────────────
+// These flow into every SOW.
+export const TERMS = {
+  collaborationWindow: "11:00\u201316:00 PT",
+  collaborationNote: "Meetings, syncs, collaborative work. Everything outside this window is IC time.",
+  nda: "Standard on all engagements.",
+  exclusivity: "None. Confidentiality protected, not contractual.",
+  ipRule: "Work product assigned to client when full rate is paid. Retained otherwise.",
+  tePolicy: "Travel and expenses billed separately at cost. Never included in retainer.",
+  paymentTerms: "Net 15. First month upfront on signing.",
+  upfrontDiscount: "10% off total contract if full term paid upfront.",
+};
+
+// ─── TRAVEL POLICY ───────────────────────────────────────────
 export const TRAVEL = {
   longHaul: { threshold: "2,000+ miles", class: "Business" },
   shortHaul: [
     { window: "AM / night flights", class: "Business" },
     { window: "Midday flights", class: "Economy (travel day)" },
   ],
-  hotel: "Gym on-site required, or walkable to Barry's Bootcamp — unless selected by Niket.",
-  teNote: "T&E always billed separately. Never included in retainer.",
+  hotel: "Gym on-site required, or walkable \u2014 unless selected by Niket.",
 };
 
-// ─── PRINCIPLES ───────────────────────────────────────────────
-// Distilled. Each one actionable in conversation.
-export const PRINCIPLES = [
-  {
-    title: "State the rate. Stop talking.",
-    body: "The number is $17,500/day. Say it once. The pause after belongs to them.",
-  },
-  {
-    title: "Duration earns the discount. Nothing else does.",
-    body: "6 and 9 months are the anchor. 3 months costs more (churn). 12 months costs more (lock-in). No relationship discounts. No volume discounts on single days.",
-  },
-  {
-    title: "The floor is $7,500/month retainer. It never moves.",
-    body: "Below that, the engagement does not serve either side. If someone cannot reach the floor, the answer is not yet.",
-  },
-  {
-    title: "Equity is at your election. Not theirs.",
-    body: "If the company is real and the opportunity is compelling, you offer to take part of the engagement as equity. Clients do not propose this. You do.",
-  },
-  {
-    title: "The follow-up is one note. Then stop.",
-    body: "No re-pitching. No re-explaining the rate. One note written like you have other things going on — because you do.",
-  },
-  {
-    title: "Discounted engagements produce resentment.",
-    body: "Resentment produces bad work. Bad work costs more than the discount saved. Structure that works for the client is not the same as a lower number.",
-  },
-];
-
-// ─── PRICING ──────────────────────────────────────────────────
+// ─── PRICING ─────────────────────────────────────────────────
 export const PRICING = {
-  listRate: 17500,         // single day, no commitment
-  floorMonthly: 7500,      // minimum cash/month, non-negotiable
+  listRate: 17500,
+  floorMonthly: 7500,
   currency: "USD",
   unit: "day",
+  maxDays: 4,
 
-  // U-curve: 6 and 9 months are cheapest. 3 and 12 carry premiums.
-  // Rationale: 3mo = churn premium. 12mo = lock-in premium.
   engagementMonths: [3, 6, 9, 12],
   daysPerWeek: [1, 2, 3, 4],
 
-  // Monthly retainer rates [days_index][months_index]
   rates: [
-    [16000, 14000, 14000, 16000],   // 1 day/week
-    [29000, 25000, 25000, 29000],   // 2 days/week
-    [41000, 35000, 35000, 41000],   // 3 days/week
-    [52000, 44000, 44000, 52000],   // 4 days/week
+    [16000, 14000, 14000, 16000],
+    [29000, 25000, 25000, 29000],
+    [41000, 35000, 35000, 41000],
+    [52000, 44000, 44000, 52000],
   ],
 
   killFee: {
-    model: "Flat % of remaining contract value",
+    model: "33% of remaining contract value or one additional month \u2014 whichever is higher.",
     rate: 0.33,
     rateDisplay: "33%",
     terms: "Payable within 5 business days of written notice.",
-    note: "Client-friendly by design. Not punitive — reflects real cost of early exit.",
+    floor: "One additional month retainer, minimum.",
   },
 
   paymentTerms: "Net 15. First month upfront on signing.",
   upfrontDiscount: "10% off total contract if full term paid upfront.",
 };
 
-// ─── PIPELINE STAGES ──────────────────────────────────────────
+// ─── PIPELINE STAGES ─────────────────────────────────────────
 export const STAGES = [
   { id: "identified", label: "Identified", desc: "On radar, no conversation yet." },
   { id: "lead",       label: "Lead",       desc: "Conversation started, mutual interest." },
@@ -101,8 +104,7 @@ export const STAGES = [
   { id: "closed",     label: "Closed",     desc: "Completed or terminated." },
 ];
 
-// ─── PROJECTS ─────────────────────────────────────────────────
-// Each entry stores enough to generate an SOW downstream.
+// ─── PROJECTS ────────────────────────────────────────────────
 export const PROJECTS = [
   {
     code: "P702",
@@ -112,11 +114,11 @@ export const PROJECTS = [
     vertical: "Travel",
     payment: "None",
     paymentNote: "Family business. No compensation accepted.",
-    rate: null,
+    monthlyValue: 0,
     engagementMonths: null,
     ipAssigned: false,
     nda: false,
-    notes: "Founded by Niket's mother (July 2). Ongoing operational support.",
+    notes: "Founded by Niket\u2019s mother (July 2). Ongoing operational support.",
   },
   {
     code: "P062",
@@ -126,7 +128,7 @@ export const PROJECTS = [
     vertical: "Technology",
     payment: "Retainer",
     paymentNote: null,
-    rate: 17500,
+    monthlyValue: 17500,
     engagementMonths: null,
     ipAssigned: null,
     nda: true,
@@ -140,7 +142,7 @@ export const PROJECTS = [
     vertical: "Finance",
     payment: "Retainer",
     paymentNote: "Advisory role; may run aspects of process.",
-    rate: 17500,
+    monthlyValue: 17500,
     engagementMonths: null,
     ipAssigned: null,
     nda: true,
@@ -154,7 +156,7 @@ export const PROJECTS = [
     vertical: "Finance",
     payment: "Retainer",
     paymentNote: null,
-    rate: 17500,
+    monthlyValue: 17500,
     engagementMonths: null,
     ipAssigned: null,
     nda: true,
@@ -168,7 +170,7 @@ export const PROJECTS = [
     vertical: "Technology",
     payment: "Retainer",
     paymentNote: "Current advisor relationship. Paid consulting TBD.",
-    rate: 17500,
+    monthlyValue: 17500,
     engagementMonths: null,
     ipAssigned: null,
     nda: true,
@@ -181,8 +183,8 @@ export const PROJECTS = [
     stage: "lead",
     vertical: "Technology",
     payment: "15% equity assignment",
-    paymentNote: "ENND I, LLC (or Living Trust) assigned into entity via operating agreement or side letter. No cash floor established yet.",
-    rate: null,
+    paymentNote: "ENND I, LLC (or Living Trust) assigned via operating agreement or side letter.",
+    monthlyValue: 0,
     engagementMonths: null,
     ipAssigned: false,
     nda: true,
@@ -195,8 +197,8 @@ export const PROJECTS = [
     stage: "lead",
     vertical: "Finance",
     payment: "15% equity assignment",
-    paymentNote: "ENND I, LLC (or Living Trust) assigned into entity via operating agreement or side letter. No cash floor established yet.",
-    rate: null,
+    paymentNote: "ENND I, LLC (or Living Trust) assigned via operating agreement or side letter.",
+    monthlyValue: 0,
     engagementMonths: null,
     ipAssigned: false,
     nda: true,
@@ -204,21 +206,21 @@ export const PROJECTS = [
   },
 ];
 
-// ─── SOW FIELD ARCHITECTURE ───────────────────────────────────
-// These are the fields required to generate an SOW.
-// P003 owns the schema. Generation happens in each project's context.
+// ─── SOW FIELD ARCHITECTURE ──────────────────────────────────
 export const SOW_FIELDS = [
   { field: "client",           source: "PROJECTS.client",          required: true,  note: "Full legal name of counterparty" },
   { field: "project",          source: "PROJECTS.project",         required: true,  note: "Project name as referenced in agreement" },
-  { field: "entity",           source: "ENTITY.name",              required: true,  note: "ENND I, LLC" },
-  { field: "scope",            source: "Project context",          required: true,  note: "Defined in each project — not stored in P003" },
-  { field: "rate",             source: "PROJECTS.rate",            required: true,  note: "Monthly retainer or equity structure" },
+  { field: "entity",           source: "BRAND.entity",             required: true,  note: "ENND I, LLC" },
+  { field: "scope",            source: "Project context",          required: true,  note: "Defined in each project \u2014 not stored in P003" },
+  { field: "rate",             source: "PROJECTS.monthlyValue",    required: true,  note: "Monthly retainer or equity structure" },
   { field: "engagementLength", source: "PROJECTS.engagementMonths",required: true,  note: "3, 6, 9, or 12 months" },
   { field: "startDate",        source: "Agreed at signing",        required: true,  note: "Calendar date" },
-  { field: "killFee",          source: "PRICING.killFee",          required: true,  note: "33% of remaining. 5 business days." },
-  { field: "ipAssignment",     source: "PROJECTS.ipAssigned",      required: true,  note: "Assigned if full rate paid. Not otherwise." },
-  { field: "nda",              source: "PROJECTS.nda",             required: true,  note: "Standard practice. Attached as exhibit." },
-  { field: "paymentTerms",     source: "PRICING.paymentTerms",     required: true,  note: "Net 15. First month upfront." },
-  { field: "tePolicy",         source: "TRAVEL.teNote",            required: true,  note: "T&E billed separately at cost." },
-  { field: "exclusivity",      source: "ENTITY.exclusivity",       required: false, note: "None. Confidentiality protected." },
+  { field: "killFee",          source: "PRICING.killFee",          required: true,  note: "33% of remaining or 1 month \u2014 whichever is higher." },
+  { field: "ipAssignment",     source: "TERMS.ipRule",             required: true,  note: "Assigned if full rate paid. Retained otherwise." },
+  { field: "nda",              source: "TERMS.nda",                required: true,  note: "Standard on all engagements." },
+  { field: "paymentTerms",     source: "TERMS.paymentTerms",       required: true,  note: "Net 15. First month upfront." },
+  { field: "tePolicy",         source: "TERMS.tePolicy",           required: true,  note: "T&E billed separately at cost." },
+  { field: "exclusivity",      source: "TERMS.exclusivity",        required: false, note: "None. Confidentiality protected." },
+  { field: "collabWindow",     source: "TERMS.collaborationWindow",required: false, note: "11:00\u201316:00 PT" },
+  { field: "travelPolicy",     source: "TRAVEL",                   required: false, note: "Business class long-haul, policy per engagement." },
 ];

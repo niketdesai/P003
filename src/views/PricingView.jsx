@@ -19,8 +19,15 @@ export default function PricingView() {
     ? { rate: PRICING.rates[cell.di][cell.mi], days: PRICING.daysPerWeek[cell.di], months: PRICING.engagementMonths[cell.mi] }
     : null;
 
-  // U-curve: highlight 6 and 9 month columns
   const isAnchor = (mi) => [1, 2].includes(mi);
+
+  // Kill fee calculation: 33% of remaining OR one month, whichever is higher
+  const calcKillFee = (rate, months, exitMonth) => {
+    const remaining = rate * (months - exitMonth);
+    const thirtyThree = Math.round(remaining * 0.33 / 500) * 500;
+    const oneMonth = rate;
+    return Math.max(thirtyThree, oneMonth);
+  };
 
   return (
     <div style={{
@@ -41,6 +48,7 @@ export default function PricingView() {
         {" "}Retainer pricing follows a <span style={{ color: ACCENT }}>U-curve</span> — 6 and 9 months are the anchor rates.
         {" "}3 months carries a churn premium. 12 months carries a lock-in premium.
         {" "}Floor: <span style={{ color: "#f87171", fontWeight: 700 }}>${(PRICING.floorMonthly/1000).toFixed(1)}k/mo retainer</span> — non-negotiable.
+        {" "}Maximum: <span style={{ color: "#888" }}>{PRICING.maxDays} days/week</span>, ever.
       </div>
 
       {/* Matrix */}
@@ -137,16 +145,15 @@ export default function PricingView() {
 
           {/* Kill fee at this contract value */}
           <div style={{
-            fontFamily: "'DM Sans', sans-serif", fontSize: 11, color: "#666",
+            fontFamily: "'DM Sans', sans-serif", fontSize: 11, color: "#666", lineHeight: 1.6,
           }}>
             Kill fee if terminated early:{" "}
-            <span style={{ color: "#fb923c" }}>
-              33% of remaining balance
+            <span style={{ color: "#fb923c", fontWeight: 700 }}>
+              33% of remaining or one month — whichever is higher.
             </span>{" "}
-            — payable within 5 business days.
-            {" "}Example: exit at month {Math.ceil(selected.months / 2)} of {selected.months} ={" "}
+            Example: exit at month {Math.ceil(selected.months / 2)} of {selected.months} ={" "}
             <span style={{ color: "#fb923c" }}>
-              {fmt(Math.round(selected.rate * (selected.months - Math.ceil(selected.months / 2)) * 0.33 / 500) * 500)}
+              {fmt(calcKillFee(selected.rate, selected.months, Math.ceil(selected.months / 2)))}
             </span>
           </div>
         </div>
@@ -163,8 +170,8 @@ export default function PricingView() {
         fontFamily: "'DM Sans', sans-serif", fontSize: 12,
         color: "#888", lineHeight: 1.65,
       }}>
-        <span style={{ color: "#fb923c", fontWeight: 700 }}>{PRICING.killFee.rateDisplay} of remaining contract value.</span>
-        {" "}{PRICING.killFee.terms} {PRICING.killFee.note}
+        <span style={{ color: "#fb923c", fontWeight: 700 }}>{PRICING.killFee.model}</span>
+        {" "}{PRICING.killFee.terms}
       </div>
 
       {/* SOW field architecture */}
