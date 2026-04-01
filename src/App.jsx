@@ -5,12 +5,14 @@ import OverviewView from "./views/OverviewView.jsx";
 import ProjectsView from "./views/ProjectsView.jsx";
 import PricingView from "./views/PricingView.jsx";
 import ActionsView from "./views/ActionsView.jsx";
+import BrandView from "./views/BrandView.jsx";
 
 const TABS = [
   { id: "overview",  label: "Overview",  component: OverviewView },
   { id: "projects",  label: "Projects",  component: ProjectsView },
   { id: "pricing",   label: "Pricing",   component: PricingView  },
   { id: "actions",   label: "Actions",   component: ActionsView  },
+  { id: "brand",     label: "Brand",     component: BrandView    },
 ];
 
 export default function App({ arriving }) {
