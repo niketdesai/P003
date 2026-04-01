@@ -163,3 +163,62 @@ export const ACTIONS = [
     projects: ["P062", "P300", "P369"],
   },
 ];
+
+// ── Added 01 Apr 2026: ennd.co build + cleanup ──
+
+ACTIONS.push(
+  {
+    id: "A050",
+    category: "brand",
+    title: "Set up nnd@ennd.co email",
+    status: "open",
+    dependency: "Google Workspace migration",
+    notes: "Primary professional contact. Forward to personal or set up as primary inbox. Needs ennd.co domain verified in Google Workspace.",
+    projects: [],
+  },
+  {
+    id: "A051",
+    category: "ops",
+    title: "Migrate pad.co Google Workspace to ennd.co",
+    status: "open",
+    dependency: null,
+    notes: "Either convert existing pad.co workspace to ennd.co domain, or create new workspace at ennd.co and wind down pad.co. Google allows adding domains to existing workspace.",
+    projects: [],
+  },
+  {
+    id: "A052",
+    category: "brand",
+    title: "Set up pad.co \u2192 ennd.co redirect",
+    status: "open",
+    dependency: "A051",
+    notes: "DNS redirect. 301 permanent. pad.co should resolve to ennd.co for anyone who has the old domain.",
+    projects: [],
+  },
+  {
+    id: "A053",
+    category: "brand",
+    title: "Clean up Crunchbase profile",
+    status: "open",
+    dependency: null,
+    notes: "Remove The House Fund as primary role. Add Laurel (co-founder, now advisor). Fix website from niket.co to niket.com. Remove or update any stale affiliations. Crunchbase allows self-edits via claim.",
+    projects: [],
+  },
+  {
+    id: "A054",
+    category: "brand",
+    title: "Clean up AngelList profile",
+    status: "open",
+    dependency: null,
+    notes: "Update or deprecate. Frozen circa 2016. Remove House Fund. Update Laurel relationship. Clarify no personal syndicate \u2014 investments only. Remove Yomomma Ventures reference.",
+    projects: [],
+  },
+  {
+    id: "A055",
+    category: "brand",
+    title: "Build and deploy ennd.co",
+    status: "open",
+    dependency: "A050 (email), content finalized in P003 Brand tab",
+    notes: "Single page. Dark, gold accent, monospace. Positioning sentence + timeline + now section + essay link + nnd@ennd.co. Hub for future ENND entities (/1, /2 etc). Build spec finalized this session.",
+    projects: [],
+  }
+);
