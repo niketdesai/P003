@@ -72,7 +72,7 @@ export const ACTIONS = [
     title: "Set up Desfam Longer Irrevocable Trust",
     status: "open",
     dependency: "Turner / Goldman Sachs",
-    notes: "Pending. Once active, provides creditor protection layer that the revocable Living Trust does not. Target: hold long-term equity positions (OPV, GFS, potentially Laurel secondary).",
+    notes: "Pending. Key mechanics: irrevocable trust gets its own EIN, files Form 1041, has own GS account. Compressed tax brackets hit 37% at ~$15,650 \u2014 so Turner should structure distribution policy to push income to beneficiaries (you) at personal rates, not retain inside trust. Primary purpose: creditor protection + estate tax reduction (assets leave your taxable estate). Tradeoff: you give up direct control. Good candidates: long-term equity positions (OPV, GFS, Laurel secondary post-liquidity). Start with Living Trust now, migrate select assets to Irrevocable once set up.",
     projects: [],
   },
   {
