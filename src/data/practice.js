@@ -108,6 +108,19 @@ export const PRICING = {
 
   paymentTerms: "Net 15. First month upfront on signing.",
   upfrontDiscount: "10% off total contract if full term paid upfront.",
+
+  equityDisplay: {
+    rule: "Always display equity component as $0 when none is included.",
+    rationale: "Makes the discount visible — client sees below-list pricing AND no equity.",
+    format: "Equity / Options: $0",
+  },
+
+  equityClawback: {
+    rule: "Equity vests monthly over the engagement term. Early termination forfeits unvested equity.",
+    earlyTermination: "Kill fee applies to cash. Equity vests pro-rata to months completed. Unvested returns to client.",
+    protection: "Minimum 60-day engagement for any equity to vest. First 30 days: no equity vests.",
+    openQuestion: "Retention on client breach needs legal review.",
+  },
 };
 
 // ─── PIPELINE STAGES ─────────────────────────────────────────
