@@ -4,10 +4,11 @@ export const PROJECT = {
   description: "ENND I, LLC — Practice operating system.",
   entity: "ENND I, LLC",
   passcode: "ennd1",
-  version: "v2.5.1-260402",
+  googleClientId: "",  // Set in Google Cloud Console → ennd.co project
+  version: "v2.6.0-260402",
   accent: "#D4A853",
   accentName: "gold",
   repoName: "P003",
   pagesUrl: "https://niketdesai.github.io/P003/",
-  shortUrl: "https://niket.is/building/p003",
+  shortUrl: "https://ennd.co/p/003",
 };

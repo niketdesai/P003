@@ -2,27 +2,25 @@ import { StrictMode, useState } from "react";
 import { createRoot } from "react-dom/client";
 import "./theme/responsive.css";
 import App from "./App.jsx";
-import PasswordGate from "./components/PasswordGate.jsx";
+import GoogleAuthGate from "./components/GoogleAuthGate.jsx";
 import { PROJECT } from "./config.js";
 
 function Root() {
-  const sessionKey = `p003_auth_${PROJECT.passcode}`;
+  const sessionKey = `p003_gauth`;
   const [authed, setAuthed] = useState(() => {
     try { return sessionStorage.getItem(sessionKey) === "1"; } catch { return false; }
   });
-  const [arriving, setArriving] = useState(authed);
 
   const handleAuth = () => {
     try { sessionStorage.setItem(sessionKey, "1"); } catch {}
-    setArriving(true);
-    setTimeout(() => setAuthed(true), 200);
+    setAuthed(true);
   };
 
   if (!authed) {
-    return <PasswordGate onAuth={handleAuth} />;
+    return <GoogleAuthGate onAuth={handleAuth} />;
   }
 
-  return <App arriving={arriving} />;
+  return <App arriving={true} />;
 }
 
 createRoot(document.getElementById("root")).render(
