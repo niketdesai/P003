@@ -122,7 +122,7 @@ export const PRICING = {
         "T&E always separate",
       ],
       hides: "Matrix, floor logic, sweet spot, kill fee, discount mechanics",
-      anchor: "Matrix minimum is $10,500/mo. Never reference $7,500 externally.",
+      anchor: "Matrix minimum is $12,000/mo (1d/wk × 6mo). Never reference $7,500 externally.",
     },
     tier2_proposal: {
       name: "Proposal SOW (qualified leads)",
@@ -177,6 +177,135 @@ export const PRICING = {
       note: "Same financial mechanics as clean kill, plus: breach is punitive — vested equity retained AND cash conversion on unvested. Client pays for both.",
     },
     example: "6-month deal, $15k/mo cash + equity at $17.5k/mo list. Client kills at month 3. Vested equity (months 2–3): kept. Cash kill: max(33% × $15k × 3, $15k) = $14,850. Equity conversion: 33% × (3/5 × $17.5k × 6) = $20,790. Total payout: $35,640.",
+  },
+};
+
+// ─── SOW PROCESS ────────────────────────────────────────────
+// Codified workflow for creating, sending, and executing SOWs.
+// Every new engagement follows this process. No exceptions.
+export const SOW_PROCESS = {
+  // ── STEP 1: SCOPE ──
+  scope: {
+    trigger: "Lead moves to 'Proposed' stage",
+    actions: [
+      "Define workstreams and deliverables with client",
+      "Determine duration (3–12mo) and density (1–4d/wk)",
+      "Look up pricing in matrix — identify recommended cell",
+      "Determine if equity is part of the deal",
+      "Confirm client entity name, signatory, and contact",
+    ],
+  },
+
+  // ── STEP 2: BUILD PROPOSAL (TIER 2) ──
+  proposal: {
+    format: "Project site SOW tab — P300 is the template",
+    required: [
+      "Parties (advisor entity + client entity + signatories)",
+      "Problem statement (why they need this)",
+      "Scope (workstreams with descriptions)",
+      "Deliverables (specific artifacts per workstream)",
+      "Timeline (sequencing, dependencies, inputs required from client)",
+      "Compensation — MUST include:",
+      "  → Full pricing matrix (shows the universe)",
+      "  → Recommended engagement highlighted",
+      "  → List rate stated ($17,500/day/month)",
+      "  → Discount shown explicitly (X% for Y duration at Z density)",
+      "  → Payment options if applicable (standard, deferred, equity)",
+      "  → Equity line always visible ($0 if none — makes discount visible)",
+      "  → If equity option: full equity terms block (assignment, vesting, termination)",
+      "Standard terms block",
+      "Out of scope (explicit exclusions)",
+      "Acceptance section with signature blocks",
+    ],
+    standardTerms: [
+      "Kill fee: 33% of remaining contract value or 1 month — whichever higher",
+      "T&E: billed separately at cost, never in retainer",
+      "IP: assigned to client when engagement rate is paid in full",
+      "Collaboration: 11:00–16:00 PT for meetings and syncs",
+      "Payment: Net 15. First month upfront on signing",
+      "NDA: standard on all engagements, attached as exhibit",
+      "Exclusivity: none. Confidentiality protected, not contractual",
+    ],
+    equityBlock: {
+      when: "Include whenever equity or deferred compensation is an option",
+      required: [
+        "Assignment: granted to advisor's designated entity (trust), not ENND I",
+        "Vesting: monthly, 1-month cliff, nothing vests month 1",
+        "Valuation: equity valued at list rate ($17,500/day/month equivalent)",
+        "Clean termination: vested retained, unvested returns, 33% kill fee on cash + equity",
+        "Client breach: vested retained AND 33% of unvested at list rate in cash (punitive)",
+      ],
+    },
+    languageRules: [
+      "Never call it 'cash floor' — use 'retainer' for external-facing language",
+      "Never reference $7,500 — that is a conceptual exception, never on the matrix",
+      "Matrix minimum is $12,000/mo (1d/wk × 6mo) — anchor above this publicly",
+      "Accommodations for specific clients are noted as exceptions, not standards",
+      "Use 'retainer always applies' not 'cash component always applies'",
+    ],
+  },
+
+  // ── STEP 3: SEND & NEGOTIATE ──
+  negotiate: {
+    actions: [
+      "Share project site link (ennd.co/p/###) with client",
+      "Walk through SOW on a call — don't just send it",
+      "Track changes and counter-proposals",
+      "Move project stage to 'Negotiating'",
+    ],
+  },
+
+  // ── STEP 4: EXECUTE (TIER 3) ──
+  execute: {
+    format: "NND-branded PDF (future: nnd_style system skill)",
+    interim: "Google Doc with ENND letterhead until PDF skill is built",
+    actions: [
+      "Finalize all terms from negotiation",
+      "Generate executed SOW document (Tier 2 content + binding language)",
+      "Add: kill fee formula with equity conversion mechanics",
+      "Add: IP assignment clause",
+      "Add: equity vesting schedule and clawback (if applicable)",
+      "Add: NDA (reference or inline)",
+      "Add: collaboration window, T&E specifics, exclusivity",
+      "Add: termination mechanics (clean kill vs breach)",
+      "Send for signature (Google Workspace eSignature or equivalent)",
+      "Both parties sign → PDF with audit trail auto-generated",
+      "Store signed PDF in Drive: ENND I / Clients / [Client] / SOWs /",
+      "Send confirmation from nnd@ennd.co with signed copy attached",
+      "Move project stage to 'Signed'",
+    ],
+    checklist: [
+      "Entity name matches client's legal entity exactly",
+      "Signatory has authority to bind the entity",
+      "Equity assignment entity specified (trust, not ENND I)",
+      "Kill fee covers both cash and equity components",
+      "IP assignment is conditional on full payment",
+      "NDA is attached or referenced",
+      "First month payment amount and due date specified",
+      "All accommodations noted as engagement-specific exceptions",
+    ],
+  },
+
+  // ── STEP 5: POST-EXECUTION ──
+  postExecution: {
+    actions: [
+      "Invoice first month immediately",
+      "Set up recurring invoice schedule",
+      "Update project stage to 'Active'",
+      "Update project monthly value in P003 pipeline",
+      "Confirm collaboration window and primary contacts",
+    ],
+  },
+
+  // ── DOWNSTREAM PROPAGATION ──
+  propagation: {
+    note: "When SOW terms, language, or process change in P003, all active project SOWs must be audited for consistency.",
+    affected: [
+      "P300 (Global Regenesis) — SOW tab",
+      "Any future project SOWs",
+      "ennd.co/engage (public pricing)",
+      "Outreach message templates (essay distribution)",
+    ],
   },
 };
 

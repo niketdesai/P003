@@ -5,7 +5,7 @@ export const PROJECT = {
   entity: "ENND I, LLC",
   passcode: "ennd1",
   googleClientId: "",  // Set in Google Cloud Console → ennd.co project
-  version: "v3.2.0-260402",
+  version: "v3.3.0-260402",
   accent: "#3E6670",
   accentName: "teal",
   repoName: "P003",
