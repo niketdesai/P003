@@ -53,6 +53,13 @@ export const ACTIONS = [
 
   // ── PRIORITY 2: THIS WEEK
   {
+    id: "A061", priority: 2, category: "brand",
+    title: "Publish On Hospitality (in San Francisco)",
+    status: "inProgress", dependency: null,
+    notes: "Third essay in NND D5 pipeline. Hospitality vertical. Goes in Thinking section on ennd.co with vermilion underline. Not a project card — writing only.",
+    projects: ["P902"],
+  },
+  {
     id: "A001", priority: 2, category: "entity",
     title: "Resolve OPV equity holding entity",
     status: "blocked", dependency: "Turner / Goldman Sachs",
@@ -75,6 +82,20 @@ export const ACTIONS = [
   },
 
   // ── PRIORITY 3: THIS MONTH
+  {
+    id: "A062", priority: 3, category: "brand",
+    title: "Publish SFCGJ Report: Sirens and Alerts",
+    status: "open", dependency: "SFCGJ publication schedule — May 2026",
+    notes: "Two reports (Sirens + Digital Alerts) under one project. Niket served on the SF Civil Grand Jury 2025–26. Add project card to ennd.co after public release.",
+    projects: ["P903"],
+  },
+  {
+    id: "A063", priority: 3, category: "brand",
+    title: "Publish SFCGJ Report: County Jails",
+    status: "open", dependency: "SFCGJ publication schedule — May 2026",
+    notes: "Niket served on the SF Civil Grand Jury 2025–26. Add project card to ennd.co after public release.",
+    projects: ["P904"],
+  },
   {
     id: "A004", priority: 3, category: "entity",
     title: "Formalize OPV assignment agreement",
