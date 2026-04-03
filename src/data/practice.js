@@ -109,17 +109,74 @@ export const PRICING = {
   paymentTerms: "Net 15. First month upfront on signing.",
   upfrontDiscount: "10% off total contract if full term paid upfront.",
 
+  // ── SOW TIERS ──────────────────────────────────────────────
+  sowTiers: {
+    tier1_public: {
+      name: "Public (ennd.co)",
+      purpose: "Self-qualification. Signal premium, structured, accessible.",
+      shows: [
+        "Two-axis model (duration × density) — structure, not numbers",
+        "Starting range anchored where you want to be hired",
+        "2–4 days/week, 3–12 month terms, longer = lower rate",
+        "Equity/options at principal's election",
+        "T&E always separate",
+      ],
+      hides: "Matrix, floor logic, sweet spot, kill fee, discount mechanics",
+      anchor: "Matrix minimum is $10,500/mo. Never reference $7,500 externally.",
+    },
+    tier2_proposal: {
+      name: "Proposal SOW (qualified leads)",
+      purpose: "Close. Full matrix, specific recommendation, transparent math.",
+      format: "P300 is the template. Matrix + recommendation + scope + terms.",
+    },
+    tier3_executed: {
+      name: "Executed SOW (contract)",
+      purpose: "Legal protection. Tier 2 + kill fee formula, IP, equity mechanics, NDA, termination.",
+    },
+  },
+
   equityDisplay: {
     rule: "Always display equity component as $0 when none is included.",
     rationale: "Makes the discount visible — client sees below-list pricing AND no equity.",
     format: "Equity / Options: $0",
   },
 
-  equityClawback: {
-    rule: "Equity vests monthly over the engagement term. Early termination forfeits unvested equity.",
-    earlyTermination: "Kill fee applies to cash. Equity vests pro-rata to months completed. Unvested returns to client.",
-    protection: "Minimum 60-day engagement for any equity to vest. First 30 days: no equity vests.",
-    openQuestion: "Retention on client breach needs legal review.",
+  equityAssignment: {
+    rule: "Equity compensation is granted directly to a designated entity, not ENND I.",
+    default: "Desfam Long Living Trust (or designated assignee).",
+    rationale: "Consulting liability in ENND I should never touch equity positions. Equity goes to the trust from day one.",
+    sowLanguage: "Equity compensation shall be granted to [Desfam Long Living Trust] or its designated assignee.",
+    requirement: "Client operating agreement must include permitted transferee language. Turner to verify per engagement.",
+  },
+
+  equityVesting: {
+    schedule: "Monthly vesting.",
+    cliff: "1-month cliff on multi-month engagements. Nothing vests in month 1. Monthly vesting begins month 2.",
+    example: "6-month engagement: 0% month 1, then 1/5 per month (months 2–6). Fully vested at completion.",
+    rationale: "Protects against deals that go sideways immediately. Fair from almost the start.",
+  },
+
+  equityValuation: {
+    rule: "Equity is earned at list rate, not the floor or discounted rate.",
+    conversion: "Equity value per month = list rate ($17,500/day/month equivalent). Specific valuation methodology (last priced round, negotiated, etc.) specified per deal.",
+  },
+
+  equityTermination: {
+    cleanKill: {
+      vestedEquity: "You keep. It's earned.",
+      unvestedEquity: "Returns to client.",
+      cashKillFee: "33% of remaining cash contract value, or 1 month cash — whichever is higher.",
+      equityKillFee: "33% of unvested equity value at list rate, paid in cash.",
+      total: "Cash kill fee + equity conversion = total payout.",
+    },
+    clientBreach: {
+      vestedEquity: "You keep.",
+      unvestedEquity: "Returns to client.",
+      cashKillFee: "33% of remaining cash contract value, or 1 month cash — whichever is higher.",
+      equityKillFee: "33% of unvested equity value at list rate, paid in cash.",
+      note: "Same financial mechanics as clean kill, plus: breach is punitive — vested equity retained AND cash conversion on unvested. Client pays for both.",
+    },
+    example: "6-month deal, $15k/mo cash + equity at $17.5k/mo list. Client kills at month 3. Vested equity (months 2–3): kept. Cash kill: max(33% × $15k × 3, $15k) = $14,850. Equity conversion: 33% × (3/5 × $17.5k × 6) = $20,790. Total payout: $35,640.",
   },
 };
 
