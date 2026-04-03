@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { PROJECTS, STAGES, PRICING } from "../data/practice.js";
 
-const ACCENT = "#D4A853";
+const ACCENT = "#3E6670";
 
 const VERTICAL_COLORS = {
   "Technology":  "#3E6670",
@@ -12,9 +12,9 @@ const VERTICAL_COLORS = {
 
 const STAGE_COLORS = {
   identified: "#555",
-  lead:        "#D4A853",
+  lead:        "#3E6670",
   proposed:    "#fb923c",
-  negotiating: "#f87171",
+  negotiating: "#C4462B",
   signed:      "#818CF8",
   active:      "#4ade80",
   paused:      "#555",

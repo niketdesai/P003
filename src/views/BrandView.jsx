@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { BRAND } from "../data/practice.js";
 
-const ACCENT = "#D4A853";
+const ACCENT = "#3E6670";
 
 const OPEN_QUESTIONS = [
   {

@@ -6,8 +6,8 @@ export const PROJECT = {
   passcode: "ennd1",
   googleClientId: "",  // Set in Google Cloud Console → ennd.co project
   version: "v3.0.0-260402",
-  accent: "#D4A853",
-  accentName: "gold",
+  accent: "#3E6670",
+  accentName: "teal",
   repoName: "P003",
   pagesUrl: "https://niketdesai.github.io/P003/",
   shortUrl: "https://ennd.co/p/003",

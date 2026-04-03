@@ -108,7 +108,7 @@ export default function GoogleAuthGate({ onAuth }) {
             color: accent,
             marginBottom: 6,
           }}>
-            ENND I
+            ENND CO
           </div>
           <div style={{
             height: 1,
@@ -121,7 +121,7 @@ export default function GoogleAuthGate({ onAuth }) {
             fontSize: 9, letterSpacing: "0.18em",
             color: "#3a3830",
           }}>
-            CONSULTING · ADVISORY · CAPITAL
+            TECHNOLOGY · HOSPITALITY · FINANCE
           </div>
         </div>
 

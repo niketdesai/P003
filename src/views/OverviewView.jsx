@@ -1,7 +1,13 @@
 import { useState, useEffect } from "react";
 import { BRAND, PRINCIPLES, TERMS, TRAVEL } from "../data/practice.js";
 
-const ACCENT = "#D4A853";
+const ACCENT = "#3E6670";
+const VERTICAL_COLORS = {
+  "Travel": "#8A8478",
+  "Technology": "#3E6670",
+  "Finance": "#2B4A5C",
+  "Hospitality": "#C4462B",
+};
 
 export default function OverviewView() {
   const [revealed, setRevealed] = useState(false);
@@ -48,9 +54,10 @@ export default function OverviewView() {
             <span key={v} style={{
               fontFamily: "'Space Mono', monospace",
               fontSize: 9, fontWeight: 700,
-              color: ACCENT, letterSpacing: "0.08em",
-              background: `${ACCENT}12`,
-              border: `1px solid ${ACCENT}22`,
+              letterSpacing: "0.08em",
+              color: VERTICAL_COLORS[v] || ACCENT,
+              background: (VERTICAL_COLORS[v] || ACCENT) + "12",
+              border: `1px solid ${(VERTICAL_COLORS[v] || ACCENT)}22`,
               borderRadius: 4, padding: "4px 10px",
             }}>{v.toUpperCase()}</span>
           ))}

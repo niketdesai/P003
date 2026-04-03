@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { ACTIONS, ACTION_STATUSES, ACTION_CATEGORIES } from "../data/actions.js";
 
-const ACCENT = "#D4A853";
+const ACCENT = "#3E6670";
 const STATUS_COLORS = {};
 ACTION_STATUSES.forEach(s => { STATUS_COLORS[s.id] = s.color; });
 
@@ -14,7 +14,7 @@ const PRIORITY_LABELS = {
 };
 
 const PRIORITY_COLORS = {
-  1: "#f87171",
+  1: "#C4462B",
   2: ACCENT,
   3: "#818CF8",
   4: "#555",
@@ -88,7 +88,7 @@ export default function ActionsView() {
       }}>
         {[
           { label: "ACTIVE", value: activeCount, color: ACCENT },
-          { label: "BLOCKED", value: blockedCount, color: blockedCount > 0 ? "#f87171" : "#333" },
+          { label: "BLOCKED", value: blockedCount, color: blockedCount > 0 ? "#C4462B" : "#333" },
           { label: "DONE", value: completeCount, color: "#4ade80" },
         ].map(card => (
           <div key={card.label} style={{
@@ -110,7 +110,7 @@ export default function ActionsView() {
       {/* Status filters */}
       <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 20 }}>
         <FilterBtn id="active" label="ACTIVE" count={activeCount} />
-        <FilterBtn id="blocked" label="BLOCKED" count={blockedCount} color="#f87171" />
+        <FilterBtn id="blocked" label="BLOCKED" count={blockedCount} color="#C4462B" />
         <FilterBtn id="open" label="OPEN" count={ACTIONS.filter(a => a.status === "open").length} />
         <FilterBtn id="complete" label="DONE" count={completeCount} color="#4ade80" />
         <FilterBtn id="all" label="ALL" count={ACTIONS.length} color="#888" />
@@ -193,7 +193,7 @@ export default function ActionsView() {
                       {action.dependency && (
                         <div style={{
                           fontFamily: "'Space Mono', monospace",
-                          fontSize: 9, color: "#f8717188",
+                          fontSize: 9, color: "#C4462B88",
                           marginBottom: 8,
                         }}>
                           BLOCKED BY: {action.dependency}

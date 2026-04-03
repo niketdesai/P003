@@ -3,8 +3,8 @@
 // Priority-ordered. Status-filtered. No category grouping.
 
 export const ACTION_STATUSES = [
-  { id: "blocked",    label: "Blocked",     color: "#f87171", desc: "Waiting on external dependency." },
-  { id: "open",       label: "Open",        color: "#D4A853", desc: "Ready to work, not started." },
+  { id: "blocked",    label: "Blocked",     color: "#C4462B", desc: "Waiting on external dependency." },
+  { id: "open",       label: "Open",        color: "#3E6670", desc: "Ready to work, not started." },
   { id: "inProgress", label: "In Progress", color: "#818CF8", desc: "Actively being worked." },
   { id: "review",     label: "Review",      color: "#fb923c", desc: "Done, needs validation." },
   { id: "complete",   label: "Complete",    color: "#4ade80", desc: "Done." },

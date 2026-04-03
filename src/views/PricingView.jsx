@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { PRICING, SOW_FIELDS } from "../data/practice.js";
 
-const ACCENT = "#D4A853";
+const ACCENT = "#3E6670";
 
 function fmt(n) { return "$" + (n / 1000).toFixed(n % 1000 === 0 ? 0 : 1) + "k"; }
 
@@ -54,7 +54,7 @@ export default function PricingView() {
       }}>
         {[
           { label: "LIST RATE", value: `${fmt(PRICING.listRate)}`, sub: "/day/month" },
-          { label: "FLOOR", value: `${fmt(PRICING.floorMonthly)}`, sub: "/mo minimum", color: "#f87171" },
+          { label: "FLOOR", value: `${fmt(PRICING.floorMonthly)}`, sub: "/mo minimum", color: "#C4462B" },
           { label: "MAX DENSITY", value: `${PRICING.maxDays}d`, sub: "/week, ever" },
         ].map(({ label, value, sub, color }) => (
           <div key={label} style={{
@@ -164,7 +164,7 @@ export default function PricingView() {
                       }}>{fmt(rate)}</div>
                       <div style={{
                         fontSize: 8, marginTop: 2,
-                        color: discount > 0 ? "#4ade8088" : discount < 0 ? "#f8717188" : "#333",
+                        color: discount > 0 ? "#4ade8088" : discount < 0 ? "#C4462B88" : "#333",
                       }}>
                         {discount > 0 ? `−${discount}%` : discount < 0 ? `+${Math.abs(discount)}%` : "LIST"}
                       </div>
@@ -198,7 +198,7 @@ export default function PricingView() {
             {selected.days}D/WK · {selected.tier.toUpperCase()}
             {selected.discount !== 0 && (
               <span style={{
-                color: selected.discount > 0 ? "#4ade80" : "#f87171",
+                color: selected.discount > 0 ? "#4ade80" : "#C4462B",
                 marginLeft: 8,
               }}>
                 {selected.discount > 0 ? `${selected.discount}% OFF` : `${Math.abs(selected.discount)}% PREMIUM`}
