@@ -58,8 +58,8 @@ export default function PricingView() {
           { label: "MAX DENSITY", value: `${PRICING.maxDays}d`, sub: "/week, ever" },
         ].map(({ label, value, sub, color }) => (
           <div key={label} style={{
-            background: "#0e0c08",
-            border: "1px solid #1e1c14",
+            background: "var(--card-bg)",
+            border: "1px solid rgba(244,241,234,0.06)",
             borderRadius: 8, padding: "14px 12px",
             textAlign: "center",
           }}>
@@ -82,7 +82,7 @@ export default function PricingView() {
 
       {/* U-curve explanation */}
       <div style={{
-        background: "#0e0c08", border: `1px solid ${ACCENT}15`,
+        background: "var(--card-bg)", border: `1px solid ${ACCENT}15`,
         borderRadius: 8, padding: "12px 16px", marginBottom: 20,
         fontFamily: "'Archivo', sans-serif", fontSize: 11,
         color: "#666", lineHeight: 1.6,
@@ -108,7 +108,7 @@ export default function PricingView() {
               <th style={{
                 padding: "10px 8px", textAlign: "left",
                 fontSize: 8, color: "#555", letterSpacing: "0.08em",
-                borderBottom: "1px solid #1e1c14", fontWeight: 700,
+                borderBottom: "1px solid rgba(244,241,234,0.06)", fontWeight: 700,
               }}></th>
               {PRICING.engagementTiers.map((t, ti) => (
                 <th key={t} style={{
@@ -186,7 +186,7 @@ export default function PricingView() {
       {/* Selected cell detail */}
       {selected && (
         <div style={{
-          background: "#0e0c08", border: `1px solid ${ACCENT}33`,
+          background: "var(--card-bg)", border: `1px solid ${ACCENT}33`,
           borderRadius: 8, padding: "16px 18px", marginBottom: 20,
           animation: "fadeIn 0.2s ease",
         }}>
@@ -216,11 +216,11 @@ export default function PricingView() {
               { label: "EFF/DAY", value: fmt(effectiveDay(selected.rate, selected.days)), sub: "blended" },
             ].map(({ label, value, sub }) => (
               <div key={label} style={{
-                background: "#080806", borderRadius: 6,
+                background: "var(--near-black)", borderRadius: 6,
                 padding: "10px 12px", textAlign: "center",
               }}>
                 <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 8, color: "#555", marginBottom: 5 }}>{label}</div>
-                <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 14, fontWeight: 700, color: "#f0ede5" }}>{value}</div>
+                <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 14, fontWeight: 700, color: "var(--cream)" }}>{value}</div>
                 <div style={{ fontFamily: "'Archivo', sans-serif", fontSize: 9, color: "#444", marginTop: 3 }}>{sub}</div>
               </div>
             ))}
@@ -250,7 +250,7 @@ export default function PricingView() {
         fontSize: 10, fontWeight: 800, color: "#555", letterSpacing: "0.1em", marginBottom: 12,
       }}>KILL FEE</div>
       <div style={{
-        background: "#0e0c08", border: "1px solid #1e1c14",
+        background: "var(--card-bg)", border: "1px solid rgba(244,241,234,0.06)",
         borderRadius: 8, padding: "14px 16px", marginBottom: 24,
         fontFamily: "'Archivo', sans-serif", fontSize: 12,
         color: "#888", lineHeight: 1.65,
@@ -291,8 +291,8 @@ export default function PricingView() {
                 display: "grid",
                 gridTemplateColumns: "110px 150px 1fr",
                 gap: 8, alignItems: "start",
-                background: "#0e0c08",
-                border: "1px solid #1a1814",
+                background: "var(--card-bg)",
+                border: "1px solid rgba(244,241,234,0.04)",
                 borderRadius: 6, padding: "9px 12px",
               }}>
                 <div style={{

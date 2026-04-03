@@ -41,8 +41,8 @@ export default function PasswordGate({ onAuth }) {
   return (
     <div style={{
       fontFamily: "'Space Mono', monospace",
-      background: "#080806",
-      color: "#c8c4b0",
+      background: "var(--near-black)",
+      color: "var(--cream)",
       minHeight: "100dvh",
       display: "flex",
       alignItems: "center",
@@ -94,7 +94,7 @@ export default function PasswordGate({ onAuth }) {
       {launching && phase >= 4 && (
         <div style={{
           position: "fixed", inset: 0,
-          background: "#080806",
+          background: "var(--near-black)",
           zIndex: 100,
           animation: "goldFlood 0.5s ease forwards",
         }} />
@@ -152,7 +152,7 @@ export default function PasswordGate({ onAuth }) {
                   background: "#0e0e0a",
                   border: `1px solid ${error ? "#b85c5c" : "#2a2820"}`,
                   borderRadius: 4,
-                  color: "#f0ede5",
+                  color: "var(--cream)",
                   fontFamily: "'Space Mono', monospace",
                   fontSize: 16,
                   letterSpacing: "0.12em",

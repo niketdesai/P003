@@ -72,8 +72,8 @@ export default function ProjectsView() {
           { label: "EQUITY", value: String(equityProjects.length), sub: "assignments", color: "#c084fc" },
         ].map(({ label, value, sub, color }) => (
           <div key={label} style={{
-            background: "#0e0c08",
-            border: "1px solid #1e1c14",
+            background: "var(--card-bg)",
+            border: "1px solid rgba(244,241,234,0.06)",
             borderRadius: 8, padding: "14px 12px",
             textAlign: "center",
           }}>
@@ -112,8 +112,8 @@ export default function ProjectsView() {
 
           return (
             <div key={s.id} style={{
-              background: "#0e0c08",
-              border: "1px solid #1e1c14",
+              background: "var(--card-bg)",
+              border: "1px solid rgba(244,241,234,0.06)",
               borderRadius: 6, padding: "12px 14px",
             }}>
               <div style={{
@@ -145,7 +145,7 @@ export default function ProjectsView() {
               </div>
               {/* Bar */}
               <div style={{
-                height: 4, background: "#151310",
+                height: 4, background: "rgba(244,241,234,0.03)",
                 borderRadius: 2, overflow: "hidden",
               }}>
                 <div style={{
@@ -176,7 +176,7 @@ export default function ProjectsView() {
             <div key={p.code}
               onClick={() => setSelected(isSelected ? null : p.code)}
               style={{
-                background: "#0e0c08",
+                background: "var(--card-bg)",
                 border: `1px solid ${isSelected ? ACCENT + "44" : "#1e1c14"}`,
                 borderLeft: `3px solid ${VERTICAL_COLORS[p.vertical] || "#333"}`,
                 borderRadius: 8, overflow: "hidden",
@@ -198,7 +198,7 @@ export default function ProjectsView() {
                 <div>
                   <div style={{
                     fontFamily: "'Archivo', sans-serif",
-                    fontSize: 13, fontWeight: 700, color: "#f0ede5",
+                    fontSize: 13, fontWeight: 700, color: "var(--cream)",
                     marginBottom: 2,
                   }}>{p.project}</div>
                   <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
@@ -235,7 +235,7 @@ export default function ProjectsView() {
               {/* Expanded detail */}
               {isSelected && (
                 <div style={{
-                  borderTop: "1px solid #1a1814",
+                  borderTop: "1px solid rgba(244,241,234,0.04)",
                   padding: "14px 14px 16px",
                   animation: "fadeIn 0.2s ease",
                 }}>

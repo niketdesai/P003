@@ -92,7 +92,7 @@ export default function ActionsView() {
           { label: "DONE", value: completeCount, color: "#4ade80" },
         ].map(card => (
           <div key={card.label} style={{
-            background: "#0e0c08", border: "1px solid #1e1c14",
+            background: "var(--card-bg)", border: "1px solid rgba(244,241,234,0.06)",
             borderRadius: 8, padding: "12px 10px", textAlign: "center",
           }}>
             <div style={{
@@ -146,7 +146,7 @@ export default function ActionsView() {
                 <div key={action.id}
                   onClick={() => setSelected(isSelected ? null : action.id)}
                   style={{
-                    background: "#0e0c08",
+                    background: "var(--card-bg)",
                     border: `1px solid ${isSelected ? ACCENT + "44" : "#1e1c14"}`,
                     borderRadius: 8, overflow: "hidden",
                     cursor: "pointer", transition: "border-color 0.15s",
@@ -187,7 +187,7 @@ export default function ActionsView() {
 
                   {isSelected && (
                     <div style={{
-                      borderTop: "1px solid #1a1814",
+                      borderTop: "1px solid rgba(244,241,234,0.04)",
                       padding: "12px 14px 14px",
                     }}>
                       {action.dependency && (

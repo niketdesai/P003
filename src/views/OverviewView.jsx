@@ -34,7 +34,7 @@ export default function OverviewView() {
           <span style={{
             fontFamily: "'Space Mono', monospace",
             fontSize: 22, fontWeight: 700,
-            color: "#f0ede5", letterSpacing: "-0.02em",
+            color: "var(--cream)", letterSpacing: "-0.02em",
           }}>{BRAND.name}</span>
           <span style={{
             fontFamily: "'Space Mono', monospace",
@@ -72,8 +72,8 @@ export default function OverviewView() {
       <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 28 }}>
         {PRINCIPLES.map((p, i) => (
           <div key={i} style={{
-            background: "#0e0c08",
-            border: "1px solid #1e1c14",
+            background: "var(--card-bg)",
+            border: "1px solid rgba(244,241,234,0.06)",
             borderRadius: 8, padding: "14px 16px",
           }}>
             <div style={{
@@ -106,21 +106,21 @@ export default function OverviewView() {
         ].map(({ label, value }) => (
           <div key={label} style={{
             display: "grid", gridTemplateColumns: "110px 1fr",
-            background: "#0e0c08",
-            border: "1px solid #1e1c14",
+            background: "var(--card-bg)",
+            border: "1px solid rgba(244,241,234,0.06)",
             borderRadius: 6, overflow: "hidden",
           }}>
             <div style={{
               fontFamily: "'Space Mono', monospace",
               fontSize: 8, color: "#555", letterSpacing: "0.06em",
               padding: "10px 12px",
-              borderRight: "1px solid #1e1c14",
+              borderRight: "1px solid rgba(244,241,234,0.06)",
               display: "flex", alignItems: "flex-start",
               paddingTop: 11,
             }}>{label}</div>
             <div style={{
               fontFamily: "'Archivo', sans-serif",
-              fontSize: 11, color: "#c8c4b0",
+              fontSize: 11, color: "var(--cream)",
               padding: "10px 12px", lineHeight: 1.5,
             }}>{value}</div>
           </div>
@@ -140,20 +140,20 @@ export default function OverviewView() {
         ].map(({ label, value }) => (
           <div key={label} style={{
             display: "grid", gridTemplateColumns: "140px 1fr",
-            background: "#0e0c08",
-            border: "1px solid #1e1c14",
+            background: "var(--card-bg)",
+            border: "1px solid rgba(244,241,234,0.06)",
             borderRadius: 6, overflow: "hidden",
           }}>
             <div style={{
               fontFamily: "'Space Mono', monospace",
               fontSize: 8, color: "#555", letterSpacing: "0.06em",
               padding: "10px 12px",
-              borderRight: "1px solid #1e1c14",
+              borderRight: "1px solid rgba(244,241,234,0.06)",
               display: "flex", alignItems: "center",
             }}>{label}</div>
             <div style={{
               fontFamily: "'Archivo', sans-serif",
-              fontSize: 11, color: "#c8c4b0",
+              fontSize: 11, color: "var(--cream)",
               padding: "10px 12px",
               display: "flex", alignItems: "center",
             }}>{value}</div>
