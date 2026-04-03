@@ -65,7 +65,7 @@ export default function ActionsView() {
         background: statusFilter === id ? (color || ACCENT) + "18" : "#0e0c08",
         border: `1px solid ${statusFilter === id ? (color || ACCENT) + "44" : "#1e1c14"}`,
         borderRadius: 20, padding: "5px 12px",
-        fontFamily: "'JetBrains Mono', monospace",
+        fontFamily: "'Space Mono', monospace",
         fontSize: 9, color: statusFilter === id ? (color || ACCENT) : "#555",
         cursor: "pointer", fontWeight: statusFilter === id ? 700 : 400,
         transition: "all 0.15s",
@@ -96,11 +96,11 @@ export default function ActionsView() {
             borderRadius: 8, padding: "12px 10px", textAlign: "center",
           }}>
             <div style={{
-              fontFamily: "'JetBrains Mono', monospace",
+              fontFamily: "'Space Mono', monospace",
               fontSize: 7, color: "#444", letterSpacing: "0.08em", marginBottom: 6,
             }}>{card.label}</div>
             <div style={{
-              fontFamily: "'JetBrains Mono', monospace",
+              fontFamily: "'Space Mono', monospace",
               fontSize: 22, fontWeight: 700, color: card.color,
             }}>{card.value}</div>
           </div>
@@ -124,7 +124,7 @@ export default function ActionsView() {
             marginBottom: 10,
           }}>
             <div style={{
-              fontFamily: "'JetBrains Mono', monospace",
+              fontFamily: "'Space Mono', monospace",
               fontSize: 10, fontWeight: 700,
               color: PRIORITY_COLORS[tier.priority] || "#555",
               letterSpacing: "0.08em",
@@ -158,26 +158,26 @@ export default function ActionsView() {
                     gap: 10, padding: "12px 14px",
                   }}>
                     <div style={{
-                      fontFamily: "'JetBrains Mono', monospace",
+                      fontFamily: "'Space Mono', monospace",
                       fontSize: 8, color: "#333", fontWeight: 700,
                     }}>{action.id}</div>
 
                     <div>
                       <div style={{
-                        fontFamily: "'DM Sans', sans-serif",
+                        fontFamily: "'Archivo', sans-serif",
                         fontSize: 12, fontWeight: 600,
                         color: action.status === "complete" ? "#555" : "#f0ede5",
                         lineHeight: 1.4,
                         textDecoration: action.status === "complete" ? "line-through" : "none",
                       }}>{action.title}</div>
                       <div style={{
-                        fontFamily: "'JetBrains Mono', monospace",
+                        fontFamily: "'Space Mono', monospace",
                         fontSize: 7, color: "#333", marginTop: 2,
                       }}>{catLabel.toUpperCase()}</div>
                     </div>
 
                     <div style={{
-                      fontFamily: "'JetBrains Mono', monospace",
+                      fontFamily: "'Space Mono', monospace",
                       fontSize: 8, fontWeight: 700,
                       color: statusColor,
                       letterSpacing: "0.04em",
@@ -192,7 +192,7 @@ export default function ActionsView() {
                     }}>
                       {action.dependency && (
                         <div style={{
-                          fontFamily: "'JetBrains Mono', monospace",
+                          fontFamily: "'Space Mono', monospace",
                           fontSize: 9, color: "#f8717188",
                           marginBottom: 8,
                         }}>
@@ -201,8 +201,8 @@ export default function ActionsView() {
                       )}
                       {action.notes && (
                         <div style={{
-                          fontFamily: "'DM Sans', sans-serif",
-                          fontSize: 11, color: "#666", lineHeight: 1.6,
+                          fontFamily: "'Libre Baskerville', serif",
+                          fontSize: 10, color: "#666", lineHeight: 1.7,
                           marginBottom: action.projects?.length ? 10 : 0,
                         }}>{action.notes}</div>
                       )}
@@ -210,7 +210,7 @@ export default function ActionsView() {
                         <div style={{ display: "flex", gap: 6 }}>
                           {action.projects.map(p => (
                             <span key={p} style={{
-                              fontFamily: "'JetBrains Mono', monospace",
+                              fontFamily: "'Space Mono', monospace",
                               fontSize: 8, fontWeight: 700,
                               color: ACCENT, background: ACCENT + "12",
                               border: `1px solid ${ACCENT}22`,

@@ -64,16 +64,16 @@ export default function PricingView() {
             textAlign: "center",
           }}>
             <div style={{
-              fontFamily: "'JetBrains Mono', monospace",
+              fontFamily: "'Space Mono', monospace",
               fontSize: 8, color: "#444", letterSpacing: "0.08em",
               marginBottom: 8,
             }}>{label}</div>
             <div style={{
-              fontFamily: "'JetBrains Mono', monospace",
+              fontFamily: "'Space Mono', monospace",
               fontSize: 20, fontWeight: 700, color: color || ACCENT,
             }}>{value}</div>
             <div style={{
-              fontFamily: "'DM Sans', sans-serif",
+              fontFamily: "'Archivo', sans-serif",
               fontSize: 9, color: "#444", marginTop: 4,
             }}>{sub}</div>
           </div>
@@ -84,7 +84,7 @@ export default function PricingView() {
       <div style={{
         background: "#0e0c08", border: `1px solid ${ACCENT}15`,
         borderRadius: 8, padding: "12px 16px", marginBottom: 20,
-        fontFamily: "'DM Sans', sans-serif", fontSize: 11,
+        fontFamily: "'Archivo', sans-serif", fontSize: 11,
         color: "#666", lineHeight: 1.6,
       }}>
         Pricing follows a U-curve on both axes. <span style={{ color: ACCENT }}>6 months</span> and <span style={{ color: ACCENT }}>2 days/week</span> are
@@ -94,14 +94,14 @@ export default function PricingView() {
 
       {/* Matrix */}
       <div style={{
-        fontFamily: "'JetBrains Mono', monospace",
-        fontSize: 10, color: "#555", letterSpacing: "0.08em", marginBottom: 12,
+        fontFamily: "'Archivo', sans-serif",
+        fontSize: 10, fontWeight: 800, color: "#555", letterSpacing: "0.1em", marginBottom: 12,
       }}>RETAINER MATRIX</div>
 
       <div style={{ overflowX: "auto", WebkitOverflowScrolling: "touch", marginBottom: 20 }}>
         <table style={{
           width: "100%", borderCollapse: "collapse",
-          fontFamily: "'JetBrains Mono', monospace", minWidth: 420,
+          fontFamily: "'Space Mono', monospace", minWidth: 420,
         }}>
           <thead>
             <tr>
@@ -191,7 +191,7 @@ export default function PricingView() {
           animation: "fadeIn 0.2s ease",
         }}>
           <div style={{
-            fontFamily: "'JetBrains Mono', monospace",
+            fontFamily: "'Space Mono', monospace",
             fontSize: 10, color: ACCENT, letterSpacing: "0.06em",
             marginBottom: 14, fontWeight: 700,
           }}>
@@ -219,9 +219,9 @@ export default function PricingView() {
                 background: "#080806", borderRadius: 6,
                 padding: "10px 12px", textAlign: "center",
               }}>
-                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 8, color: "#555", marginBottom: 5 }}>{label}</div>
-                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 14, fontWeight: 700, color: "#f0ede5" }}>{value}</div>
-                <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 9, color: "#444", marginTop: 3 }}>{sub}</div>
+                <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 8, color: "#555", marginBottom: 5 }}>{label}</div>
+                <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 14, fontWeight: 700, color: "#f0ede5" }}>{value}</div>
+                <div style={{ fontFamily: "'Archivo', sans-serif", fontSize: 9, color: "#444", marginTop: 3 }}>{sub}</div>
               </div>
             ))}
           </div>
@@ -229,7 +229,7 @@ export default function PricingView() {
           {/* Kill fee */}
           {tierMonths[selected.tier] >= 3 && (
             <div style={{
-              fontFamily: "'DM Sans', sans-serif", fontSize: 11, color: "#666", lineHeight: 1.6,
+              fontFamily: "'Archivo', sans-serif", fontSize: 11, color: "#666", lineHeight: 1.6,
             }}>
               Kill fee:{" "}
               <span style={{ color: "#fb923c", fontWeight: 700 }}>
@@ -246,13 +246,13 @@ export default function PricingView() {
 
       {/* Kill fee model */}
       <div style={{
-        fontFamily: "'JetBrains Mono', monospace",
-        fontSize: 10, color: "#555", letterSpacing: "0.08em", marginBottom: 12,
+        fontFamily: "'Archivo', sans-serif",
+        fontSize: 10, fontWeight: 800, color: "#555", letterSpacing: "0.1em", marginBottom: 12,
       }}>KILL FEE</div>
       <div style={{
         background: "#0e0c08", border: "1px solid #1e1c14",
         borderRadius: 8, padding: "14px 16px", marginBottom: 24,
-        fontFamily: "'DM Sans', sans-serif", fontSize: 12,
+        fontFamily: "'Archivo', sans-serif", fontSize: 12,
         color: "#888", lineHeight: 1.65,
       }}>
         <span style={{ color: "#fb923c", fontWeight: 700 }}>{PRICING.killFee.model}</span>
@@ -265,13 +265,13 @@ export default function PricingView() {
         marginBottom: 12,
       }}>
         <div style={{
-          fontFamily: "'JetBrains Mono', monospace",
+          fontFamily: "'Space Mono', monospace",
           fontSize: 10, color: "#555", letterSpacing: "0.08em",
         }}>SOW FIELD ARCHITECTURE</div>
         <button onClick={() => setShowSOW(!showSOW)} style={{
           background: "none", border: `1px solid ${ACCENT}33`,
           borderRadius: 4, color: ACCENT,
-          fontFamily: "'JetBrains Mono', monospace",
+          fontFamily: "'Space Mono', monospace",
           fontSize: 9, padding: "4px 10px", cursor: "pointer",
         }}>{showSOW ? "HIDE" : "SHOW"}</button>
       </div>
@@ -279,7 +279,7 @@ export default function PricingView() {
       {showSOW && (
         <div style={{ animation: "fadeIn 0.2s ease" }}>
           <div style={{
-            fontFamily: "'DM Sans', sans-serif", fontSize: 11,
+            fontFamily: "'Archivo', sans-serif", fontSize: 11,
             color: "#555", marginBottom: 12, lineHeight: 1.5,
           }}>
             P003 owns the schema. SOW generation happens inside each project's context, pulling these fields.
@@ -296,16 +296,16 @@ export default function PricingView() {
                 borderRadius: 6, padding: "9px 12px",
               }}>
                 <div style={{
-                  fontFamily: "'JetBrains Mono', monospace",
+                  fontFamily: "'Space Mono', monospace",
                   fontSize: 9, color: f.required ? ACCENT : "#444",
                   fontWeight: f.required ? 700 : 400,
                 }}>{f.field}</div>
                 <div style={{
-                  fontFamily: "'JetBrains Mono', monospace",
+                  fontFamily: "'Space Mono', monospace",
                   fontSize: 8, color: "#333",
                 }}>{f.source}</div>
                 <div style={{
-                  fontFamily: "'DM Sans', sans-serif",
+                  fontFamily: "'Archivo', sans-serif",
                   fontSize: 10, color: "#555",
                 }}>{f.note}</div>
               </div>

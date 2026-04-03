@@ -3,6 +3,13 @@ import { PROJECTS, STAGES, PRICING } from "../data/practice.js";
 
 const ACCENT = "#D4A853";
 
+const VERTICAL_COLORS = {
+  "Technology":  "#3E6670",
+  "Hospitality": "#C4462B",
+  "Finance":     "#2B4A5C",
+  "Travel":      "#8A8478",
+};
+
 const STAGE_COLORS = {
   identified: "#555",
   lead:        "#D4A853",
@@ -71,17 +78,17 @@ export default function ProjectsView() {
             textAlign: "center",
           }}>
             <div style={{
-              fontFamily: "'JetBrains Mono', monospace",
+              fontFamily: "'Space Mono', monospace",
               fontSize: 8, color: "#444", letterSpacing: "0.08em",
               marginBottom: 8,
             }}>{label}</div>
             <div style={{
-              fontFamily: "'JetBrains Mono', monospace",
+              fontFamily: "'Space Mono', monospace",
               fontSize: 20, fontWeight: 700, color,
               marginBottom: 4,
             }}>{value}</div>
             <div style={{
-              fontFamily: "'DM Sans', sans-serif",
+              fontFamily: "'Archivo', sans-serif",
               fontSize: 9, color: "#444",
             }}>{sub}</div>
           </div>
@@ -90,8 +97,8 @@ export default function ProjectsView() {
 
       {/* Stage funnel */}
       <div style={{
-        fontFamily: "'JetBrains Mono', monospace",
-        fontSize: 10, color: "#555", letterSpacing: "0.08em", marginBottom: 14,
+        fontFamily: "'Archivo', sans-serif",
+        fontSize: 10, fontWeight: 800, color: "#555", letterSpacing: "0.1em", marginBottom: 14,
       }}>PIPELINE BY STAGE</div>
       <div style={{
         display: "flex", flexDirection: "column", gap: 6,
@@ -119,17 +126,17 @@ export default function ProjectsView() {
                     background: stageColor, flexShrink: 0,
                   }} />
                   <span style={{
-                    fontFamily: "'JetBrains Mono', monospace",
+                    fontFamily: "'Space Mono', monospace",
                     fontSize: 9, fontWeight: 700, color: stageColor,
                     letterSpacing: "0.04em",
                   }}>{s.label.toUpperCase()}</span>
                   <span style={{
-                    fontFamily: "'JetBrains Mono', monospace",
+                    fontFamily: "'Space Mono', monospace",
                     fontSize: 9, color: "#444",
                   }}>{s.count} project{s.count !== 1 ? "s" : ""}</span>
                 </div>
                 <span style={{
-                  fontFamily: "'JetBrains Mono', monospace",
+                  fontFamily: "'Space Mono', monospace",
                   fontSize: 11, fontWeight: 700,
                   color: s.value > 0 ? "#f0ede5" : "#333",
                 }}>
@@ -156,8 +163,8 @@ export default function ProjectsView() {
 
       {/* Project list */}
       <div style={{
-        fontFamily: "'JetBrains Mono', monospace",
-        fontSize: 10, color: "#555", letterSpacing: "0.08em", marginBottom: 14,
+        fontFamily: "'Archivo', sans-serif",
+        fontSize: 10, fontWeight: 800, color: "#555", letterSpacing: "0.1em", marginBottom: 14,
       }}>ALL PROJECTS</div>
       <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
         {PROJECTS.map((p) => {
@@ -171,6 +178,7 @@ export default function ProjectsView() {
               style={{
                 background: "#0e0c08",
                 border: `1px solid ${isSelected ? ACCENT + "44" : "#1e1c14"}`,
+                borderLeft: `3px solid ${VERTICAL_COLORS[p.vertical] || "#333"}`,
                 borderRadius: 8, overflow: "hidden",
                 cursor: "pointer", transition: "border-color 0.15s",
               }}>
@@ -183,31 +191,39 @@ export default function ProjectsView() {
                 gap: 12, padding: "13px 14px",
               }}>
                 <div style={{
-                  fontFamily: "'JetBrains Mono', monospace",
+                  fontFamily: "'Space Mono', monospace",
                   fontSize: 9, color: "#444", fontWeight: 700,
                 }}>{p.code}</div>
 
                 <div>
                   <div style={{
-                    fontFamily: "'DM Sans', sans-serif",
+                    fontFamily: "'Archivo', sans-serif",
                     fontSize: 13, fontWeight: 700, color: "#f0ede5",
                     marginBottom: 2,
                   }}>{p.project}</div>
-                  <div style={{
-                    fontFamily: "'DM Sans', sans-serif",
-                    fontSize: 11, color: "#555",
-                  }}>{p.client}</div>
+                  <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                    <span style={{
+                      fontFamily: "'Archivo', sans-serif",
+                      fontSize: 11, color: "#555",
+                    }}>{p.client}</span>
+                    <span style={{
+                      fontFamily: "'Space Mono', monospace",
+                      fontSize: 7, fontWeight: 700,
+                      color: VERTICAL_COLORS[p.vertical] || "#555",
+                      letterSpacing: "0.06em",
+                    }}>{(p.vertical || "").toUpperCase()}</span>
+                  </div>
                 </div>
 
                 <div style={{ textAlign: "right" }}>
                   <div style={{
-                    fontFamily: "'JetBrains Mono', monospace",
+                    fontFamily: "'Space Mono', monospace",
                     fontSize: 8, fontWeight: 700,
                     color: stageColor, marginBottom: 4,
                     letterSpacing: "0.06em",
                   }}>{p.stage.toUpperCase()}</div>
                   <div style={{
-                    fontFamily: "'JetBrains Mono', monospace",
+                    fontFamily: "'Space Mono', monospace",
                     fontSize: 10, fontWeight: 700,
                     color: p.monthlyValue > 0 ? "#f0ede5" : payColor,
                   }}>
@@ -235,11 +251,11 @@ export default function ProjectsView() {
                     ].map(({ label, value }) => (
                       <div key={label}>
                         <div style={{
-                          fontFamily: "'JetBrains Mono', monospace",
+                          fontFamily: "'Space Mono', monospace",
                           fontSize: 8, color: "#555", marginBottom: 3,
                         }}>{label}</div>
                         <div style={{
-                          fontFamily: "'DM Sans', sans-serif",
+                          fontFamily: "'Archivo', sans-serif",
                           fontSize: 11, color: "#888",
                         }}>{value}</div>
                       </div>
@@ -247,7 +263,7 @@ export default function ProjectsView() {
                   </div>
                   {p.paymentNote && (
                     <div style={{
-                      fontFamily: "'DM Sans', sans-serif",
+                      fontFamily: "'Archivo', sans-serif",
                       fontSize: 11, color: payColor,
                       marginBottom: p.notes ? 8 : 0,
                       lineHeight: 1.5,
@@ -255,7 +271,7 @@ export default function ProjectsView() {
                   )}
                   {p.notes && (
                     <div style={{
-                      fontFamily: "'DM Sans', sans-serif",
+                      fontFamily: "'Archivo', sans-serif",
                       fontSize: 11, color: "#555", lineHeight: 1.5,
                     }}>{p.notes}</div>
                   )}

@@ -26,19 +26,19 @@ export default function OverviewView() {
           marginBottom: 8,
         }}>
           <span style={{
-            fontFamily: "'JetBrains Mono', monospace",
+            fontFamily: "'Space Mono', monospace",
             fontSize: 22, fontWeight: 700,
             color: "#f0ede5", letterSpacing: "-0.02em",
           }}>{BRAND.name}</span>
           <span style={{
-            fontFamily: "'JetBrains Mono', monospace",
+            fontFamily: "'Space Mono', monospace",
             fontSize: 14, fontWeight: 700,
             color: ACCENT,
           }}>{BRAND.mark}</span>
         </div>
         <div style={{
-          fontFamily: "'DM Sans', sans-serif",
-          fontSize: 13, color: "#888", lineHeight: 1.6,
+          fontFamily: "'Libre Baskerville', serif",
+          fontSize: 12, color: "#888", lineHeight: 1.7,
           marginBottom: 14,
         }}>
           Advisory and consulting. Billed through {BRAND.entity}.
@@ -46,7 +46,7 @@ export default function OverviewView() {
         <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
           {BRAND.verticals.map(v => (
             <span key={v} style={{
-              fontFamily: "'JetBrains Mono', monospace",
+              fontFamily: "'Space Mono', monospace",
               fontSize: 9, fontWeight: 700,
               color: ACCENT, letterSpacing: "0.08em",
               background: `${ACCENT}12`,
@@ -59,8 +59,8 @@ export default function OverviewView() {
 
       {/* Principles */}
       <div style={{
-        fontFamily: "'JetBrains Mono', monospace",
-        fontSize: 10, color: "#555", letterSpacing: "0.08em", marginBottom: 14,
+        fontFamily: "'Archivo', sans-serif",
+        fontSize: 10, fontWeight: 800, color: "#555", letterSpacing: "0.1em", marginBottom: 14,
       }}>PRINCIPLES</div>
       <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 28 }}>
         {PRINCIPLES.map((p, i) => (
@@ -70,13 +70,13 @@ export default function OverviewView() {
             borderRadius: 8, padding: "14px 16px",
           }}>
             <div style={{
-              fontFamily: "'JetBrains Mono', monospace",
+              fontFamily: "'Space Mono', monospace",
               fontSize: 11, fontWeight: 700,
               color: ACCENT, marginBottom: 6, letterSpacing: "0.01em",
             }}>{p.title}</div>
             <div style={{
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: 12, color: "#777", lineHeight: 1.6,
+              fontFamily: "'Libre Baskerville', serif",
+              fontSize: 11, color: "#777", lineHeight: 1.7,
             }}>{p.body}</div>
           </div>
         ))}
@@ -84,8 +84,8 @@ export default function OverviewView() {
 
       {/* Standard Terms */}
       <div style={{
-        fontFamily: "'JetBrains Mono', monospace",
-        fontSize: 10, color: "#555", letterSpacing: "0.08em", marginBottom: 14,
+        fontFamily: "'Archivo', sans-serif",
+        fontSize: 10, fontWeight: 800, color: "#555", letterSpacing: "0.1em", marginBottom: 14,
       }}>STANDARD TERMS</div>
       <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 28 }}>
         {[
@@ -104,7 +104,7 @@ export default function OverviewView() {
             borderRadius: 6, overflow: "hidden",
           }}>
             <div style={{
-              fontFamily: "'JetBrains Mono', monospace",
+              fontFamily: "'Space Mono', monospace",
               fontSize: 8, color: "#555", letterSpacing: "0.06em",
               padding: "10px 12px",
               borderRight: "1px solid #1e1c14",
@@ -112,7 +112,7 @@ export default function OverviewView() {
               paddingTop: 11,
             }}>{label}</div>
             <div style={{
-              fontFamily: "'DM Sans', sans-serif",
+              fontFamily: "'Archivo', sans-serif",
               fontSize: 11, color: "#c8c4b0",
               padding: "10px 12px", lineHeight: 1.5,
             }}>{value}</div>
@@ -122,8 +122,8 @@ export default function OverviewView() {
 
       {/* Travel */}
       <div style={{
-        fontFamily: "'JetBrains Mono', monospace",
-        fontSize: 10, color: "#555", letterSpacing: "0.08em", marginBottom: 14,
+        fontFamily: "'Archivo', sans-serif",
+        fontSize: 10, fontWeight: 800, color: "#555", letterSpacing: "0.1em", marginBottom: 14,
       }}>TRAVEL</div>
       <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
         {[
@@ -138,14 +138,14 @@ export default function OverviewView() {
             borderRadius: 6, overflow: "hidden",
           }}>
             <div style={{
-              fontFamily: "'JetBrains Mono', monospace",
+              fontFamily: "'Space Mono', monospace",
               fontSize: 8, color: "#555", letterSpacing: "0.06em",
               padding: "10px 12px",
               borderRight: "1px solid #1e1c14",
               display: "flex", alignItems: "center",
             }}>{label}</div>
             <div style={{
-              fontFamily: "'DM Sans', sans-serif",
+              fontFamily: "'Archivo', sans-serif",
               fontSize: 11, color: "#c8c4b0",
               padding: "10px 12px",
               display: "flex", alignItems: "center",

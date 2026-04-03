@@ -40,8 +40,8 @@ export default function BrandView() {
 
       {/* Current state */}
       <div style={{
-        fontFamily: "'JetBrains Mono', monospace",
-        fontSize: 10, color: "#555", letterSpacing: "0.08em", marginBottom: 14,
+        fontFamily: "'Archivo', sans-serif",
+        fontSize: 10, fontWeight: 800, color: "#555", letterSpacing: "0.1em", marginBottom: 14,
       }}>CURRENT STATE</div>
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 28 }}>
         {[
@@ -60,17 +60,17 @@ export default function BrandView() {
               marginBottom: 6,
             }}>
               <span style={{
-                fontFamily: "'JetBrains Mono', monospace",
+                fontFamily: "'Space Mono', monospace",
                 fontSize: 9, fontWeight: 700, color: "#888",
               }}>{item.label}</span>
               <span style={{
-                fontFamily: "'JetBrains Mono', monospace",
+                fontFamily: "'Space Mono', monospace",
                 fontSize: 7, fontWeight: 700,
                 color: item.status === "done" ? "#4ade80" : ACCENT,
               }}>{item.status === "done" ? "LIVE" : "TODO"}</span>
             </div>
             <div style={{
-              fontFamily: "'DM Sans', sans-serif",
+              fontFamily: "'Archivo', sans-serif",
               fontSize: 11, color: "#666",
             }}>{item.value}</div>
           </div>
@@ -79,8 +79,8 @@ export default function BrandView() {
 
       {/* Brand architecture */}
       <div style={{
-        fontFamily: "'JetBrains Mono', monospace",
-        fontSize: 10, color: "#555", letterSpacing: "0.08em", marginBottom: 14,
+        fontFamily: "'Archivo', sans-serif",
+        fontSize: 10, fontWeight: 800, color: "#555", letterSpacing: "0.1em", marginBottom: 14,
       }}>BRAND ARCHITECTURE</div>
       <div style={{
         background: "#0e0c08", border: "1px solid #1e1c14",
@@ -98,20 +98,20 @@ export default function BrandView() {
               gap: 12, alignItems: "start",
             }}>
               <div style={{
-                fontFamily: "'JetBrains Mono', monospace",
+                fontFamily: "'Space Mono', monospace",
                 fontSize: 8, fontWeight: 700, color: ACCENT,
                 letterSpacing: "0.06em", paddingTop: 2,
               }}>{item.layer}</div>
               <div>
                 <div style={{
-                  fontFamily: "'JetBrains Mono', monospace",
+                  fontFamily: "'Space Mono', monospace",
                   fontSize: 10, color: "#f0ede5", marginBottom: 3,
                 }}>
                   {item.asset}
                   {item.mark && <span style={{ color: "#444", marginLeft: 8 }}>{item.mark}</span>}
                 </div>
                 <div style={{
-                  fontFamily: "'DM Sans', sans-serif",
+                  fontFamily: "'Archivo', sans-serif",
                   fontSize: 11, color: "#555", lineHeight: 1.5,
                 }}>{item.role}</div>
               </div>
@@ -122,8 +122,8 @@ export default function BrandView() {
 
       {/* Open questions for ennd.co */}
       <div style={{
-        fontFamily: "'JetBrains Mono', monospace",
-        fontSize: 10, color: "#555", letterSpacing: "0.08em", marginBottom: 14,
+        fontFamily: "'Archivo', sans-serif",
+        fontSize: 10, fontWeight: 800, color: "#555", letterSpacing: "0.1em", marginBottom: 14,
       }}>ENND.CO — OPEN QUESTIONS</div>
       <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
         {OPEN_QUESTIONS.map((item, i) => (
@@ -133,14 +133,14 @@ export default function BrandView() {
             borderRadius: 8, padding: "14px 16px",
           }}>
             <div style={{
-              fontFamily: "'DM Sans', sans-serif",
+              fontFamily: "'Archivo', sans-serif",
               fontSize: 12, fontWeight: 600, color: "#f0ede5",
               marginBottom: 10,
             }}>{item.q}</div>
             <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 8 }}>
               {item.options.map(opt => (
                 <span key={opt} style={{
-                  fontFamily: "'JetBrains Mono', monospace",
+                  fontFamily: "'Space Mono', monospace",
                   fontSize: 8, color: "#888",
                   background: "#151310",
                   border: "1px solid #1e1c14",
@@ -149,7 +149,7 @@ export default function BrandView() {
               ))}
             </div>
             <div style={{
-              fontFamily: "'DM Sans', sans-serif",
+              fontFamily: "'Archivo', sans-serif",
               fontSize: 10, color: "#444", fontStyle: "italic",
             }}>{item.notes}</div>
           </div>

@@ -73,7 +73,7 @@ export default function GoogleAuthGate({ onAuth }) {
 
   return (
     <div style={{
-      fontFamily: "'JetBrains Mono', monospace",
+      fontFamily: "'Space Mono', monospace",
       background: "#080806",
       color: "#c8c4b0",
       minHeight: "100dvh",

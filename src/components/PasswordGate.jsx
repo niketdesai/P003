@@ -40,7 +40,7 @@ export default function PasswordGate({ onAuth }) {
 
   return (
     <div style={{
-      fontFamily: "'JetBrains Mono', monospace",
+      fontFamily: "'Space Mono', monospace",
       background: "#080806",
       color: "#c8c4b0",
       minHeight: "100dvh",
@@ -153,7 +153,7 @@ export default function PasswordGate({ onAuth }) {
                   border: `1px solid ${error ? "#b85c5c" : "#2a2820"}`,
                   borderRadius: 4,
                   color: "#f0ede5",
-                  fontFamily: "'JetBrains Mono', monospace",
+                  fontFamily: "'Space Mono', monospace",
                   fontSize: 16,
                   letterSpacing: "0.12em",
                   outline: "none",
@@ -178,7 +178,7 @@ export default function PasswordGate({ onAuth }) {
               border: `1px solid ${accent}30`,
               borderRadius: 4,
               color: accent,
-              fontFamily: "'DM Sans', sans-serif",
+              fontFamily: "'Archivo', sans-serif",
               fontSize: 13, fontWeight: 600,
               cursor: "pointer",
               letterSpacing: "0.1em",
