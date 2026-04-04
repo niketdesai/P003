@@ -44,16 +44,22 @@ export const PRINCIPLES = [
 export const TERMS = {
   collaborationWindow: "11:00\u201316:00 PT",
   collaborationNote: "Meetings, syncs, collaborative work. Everything outside this window is IC time.",
-  nda: "Standard on all engagements.",
-  exclusivity: "None. Confidentiality protected, not contractual.",
-  ipRule: "Work product assigned to client when engagement rate is paid in full \u2014 cash, equity, or deferred. Retained until whole.",
+  nda: "A mutual non-disclosure agreement will govern the exchange of proprietary information throughout this engagement.",
+  ndaInternal: "Standard on all engagements. Attached as exhibit in Tier 3 (executed) only.",
+  exclusivity: "This is a non-exclusive engagement. The advisor maintains a limited number of concurrent advisory relationships. Confidentiality is contractual; exclusivity is not.",
+  ipRule: "Work product assigned to client when engagement rate is paid in full \u2014 retainer, equity, or deferred. Retained until whole.",
   tePolicy: "Travel and expenses billed separately at cost. Never included in retainer.",
   paymentTerms: "Net 15. First month upfront on signing.",
   upfrontDiscount: "10% off total contract if full term paid upfront.",
 };
 
 // ─── TRAVEL POLICY ───────────────────────────────────────────
+// Internal preferences — NOT surfaced directly in client-facing SOWs.
+// SOW language should be: "Travel arrangements reflect the nature and
+// duration of the trip. Billed separately at cost."
 export const TRAVEL = {
+  sowLanguage: "Travel arrangements reflect the nature and duration of the trip. Billed separately at cost.",
+  // Internal operational preferences (do not surface in SOW):
   longHaul: { threshold: "2,000+ miles", class: "Business" },
   shortHaul: [
     { window: "AM / night flights", class: "Business" },
@@ -68,7 +74,7 @@ export const TRAVEL = {
 //   Density:  2d/wk is the sweet spot (+5%). 1d and 3d baseline. 4d premium (−5%).
 export const PRICING = {
   listRate: 17500,         // per day per month, no commitment
-  floorMonthly: 7500,      // absolute minimum cash/month
+  floorMonthly: 7500,      // absolute minimum retainer/month
   currency: "USD",
   unit: "day",
   maxDays: 4,
@@ -99,6 +105,8 @@ export const PRICING = {
   sweetSpot: { di: 1, ti: 2 },
 
   killFee: {
+    internalLabel: "Kill Fee",
+    clientLabel: "Early Exit",
     model: "33% of remaining contract value or one additional month \u2014 whichever is higher.",
     rate: 0.33,
     rateDisplay: "33%",
@@ -165,18 +173,18 @@ export const PRICING = {
     cleanKill: {
       vestedEquity: "You keep. It's earned.",
       unvestedEquity: "Returns to client.",
-      cashKillFee: "33% of remaining cash contract value, or 1 month cash — whichever is higher.",
-      equityKillFee: "33% of unvested equity value at list rate, paid in cash.",
-      total: "Cash kill fee + equity conversion = total payout.",
+      retainerKillFee: "33% of remaining contract value, or 1 month retainer — whichever is higher.",
+      equityKillFee: "33% of unvested equity value at list rate, paid in retainer.",
+      total: "Retainer kill fee + equity conversion = total payout.",
     },
     clientBreach: {
       vestedEquity: "You keep.",
       unvestedEquity: "Returns to client.",
-      cashKillFee: "33% of remaining cash contract value, or 1 month cash — whichever is higher.",
-      equityKillFee: "33% of unvested equity value at list rate, paid in cash.",
-      note: "Same financial mechanics as clean kill, plus: breach is punitive — vested equity retained AND cash conversion on unvested. Client pays for both.",
+      retainerKillFee: "33% of remaining contract value, or 1 month retainer — whichever is higher.",
+      equityKillFee: "33% of unvested equity value at list rate, paid in retainer.",
+      note: "Same financial mechanics as clean kill, plus: breach is punitive — vested equity retained AND retainer conversion on unvested. Client pays for both.",
     },
-    example: "6-month deal, $15k/mo cash + equity at $17.5k/mo list. Client kills at month 3. Vested equity (months 2–3): kept. Cash kill: max(33% × $15k × 3, $15k) = $14,850. Equity conversion: 33% × (3/5 × $17.5k × 6) = $20,790. Total payout: $35,640.",
+    example: "6-month deal, $15k/mo retainer + equity at $17.5k/mo list. Client exits at month 3. Vested equity (months 2–3): kept. Retainer kill: max(33% × $15k × 3, $15k) = $14,850. Equity conversion: 33% × (3/5 × $17.5k × 6) = $20,790. Total payout: $35,640.",
   },
 };
 
@@ -213,18 +221,18 @@ export const SOW_PROCESS = {
       "  → Payment options if applicable (standard, deferred, equity)",
       "  → Equity line always visible ($0 if none — makes discount visible)",
       "  → If equity option: full equity terms block (assignment, vesting, termination)",
-      "Standard terms block",
-      "Out of scope (explicit exclusions)",
-      "Acceptance section with signature blocks",
+      "Terms block (not 'Standard Terms' — drop 'Standard', implies boilerplate)",
+      "Not in Scope (explicit exclusions, but note: individual project SOWs can pull items in when integral to engagement)",
+      "Confidentiality footer (no signature block — signatures belong in Tier 3 executed agreement only)",
     ],
     standardTerms: [
-      "Kill fee: 33% of remaining contract value or 1 month — whichever higher",
+      "Early Exit: 33% of remaining contract value or 1 month — whichever higher",
       "T&E: billed separately at cost, never in retainer",
       "IP: assigned to client when engagement rate is paid in full",
       "Collaboration: 11:00–16:00 PT for meetings and syncs",
       "Payment: Net 15. First month upfront on signing",
-      "NDA: standard on all engagements, attached as exhibit",
-      "Exclusivity: none. Confidentiality protected, not contractual",
+      "NDA: referenced in Tier 2 proposals; attached as exhibit in Tier 3 executed agreements only",
+      "Availability: non-exclusive. Advisor maintains limited concurrent relationships. Confidentiality contractual; exclusivity not",
     ],
     equityBlock: {
       when: "Include whenever equity or deferred compensation is an option",
@@ -241,6 +249,8 @@ export const SOW_PROCESS = {
       "Never reference $7,500 — that is a conceptual exception, never on the matrix",
       "Matrix minimum is $12,000/mo (1d/wk × 6mo) — anchor above this publicly",
       "Accommodations for specific clients are noted as exceptions, not standards",
+      "Frame longer commitments as earning a lower retainer, not receiving a discount from a punitive list rate",
+      "Example: 'A 6-month commitment at 1 day per week earns a 30% reduction on the monthly retainer'",
       "Use 'retainer always applies' not 'cash component always applies'",
     ],
   },
@@ -299,7 +309,7 @@ export const SOW_PROCESS = {
 
   // ── DOWNSTREAM PROPAGATION ──
   propagation: {
-    note: "When SOW terms, language, or process change in P003, all active project SOWs must be audited for consistency.",
+    note: "When SOW terms, language, or process change in P003, all active project SOWs must be audited for consistency. The 'Not in Scope' list is a default, not absolute — individual projects can pull items into scope when they are integral to the engagement (e.g., P300 includes domicile evaluation because it affects grant eligibility).",
     affected: [
       "P300 (Global Regenesis) — SOW tab",
       "Any future project SOWs",
@@ -432,12 +442,12 @@ export const SOW_FIELDS = [
   { field: "rate",             source: "PROJECTS.monthlyValue",    required: true,  note: "Monthly retainer or equity structure" },
   { field: "engagementLength", source: "PROJECTS.recommended",   required: true,  note: "Days/wk and duration tier from pricing matrix" },
   { field: "startDate",        source: "Agreed at signing",        required: true,  note: "Calendar date" },
-  { field: "killFee",          source: "PRICING.killFee",          required: true,  note: "33% of remaining or 1 month \u2014 whichever is higher." },
+  { field: "earlyExit",        source: "PRICING.killFee",          required: true,  note: "33% of remaining or 1 month \u2014 whichever is higher." },
   { field: "ipAssignment",     source: "TERMS.ipRule",             required: true,  note: "Assigned when engagement rate paid in full. Retained until whole." },
-  { field: "nda",              source: "TERMS.nda",                required: true,  note: "Standard on all engagements." },
+  { field: "nda",              source: "TERMS.nda",                required: true,  note: "Referenced in proposal (Tier 2). Attached as exhibit in executed (Tier 3) only." },
   { field: "paymentTerms",     source: "TERMS.paymentTerms",       required: true,  note: "Net 15. First month upfront." },
   { field: "tePolicy",         source: "TERMS.tePolicy",           required: true,  note: "T&E billed separately at cost." },
-  { field: "exclusivity",      source: "TERMS.exclusivity",        required: false, note: "None. Confidentiality protected." },
+  { field: "availability",     source: "TERMS.exclusivity",        required: false, note: "Non-exclusive. Limited concurrent relationships. Confidentiality contractual." },
   { field: "collabWindow",     source: "TERMS.collaborationWindow",required: false, note: "11:00\u201316:00 PT" },
-  { field: "travelPolicy",     source: "TRAVEL",                   required: false, note: "Business class long-haul, policy per engagement." },
+  { field: "travelPolicy",     source: "TRAVEL.sowLanguage",       required: false, note: "Arrangements reflect trip nature/duration. Billed at cost. (Internal preferences not surfaced.)" },
 ];
